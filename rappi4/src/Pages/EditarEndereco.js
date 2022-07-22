@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { vaiParaPerfil } from "../Router/RouteFunctions";
 
 
 const EditarEndereco = () => {
@@ -8,7 +9,7 @@ const EditarEndereco = () => {
   return (
     <div>
         <h1>Editar Endereço</h1>
-        <button onClick={() => navigate("/perfil")}>Voltar</button>
+        <button onClick={() => vaiParaPerfil(navigate)}>Voltar</button>
         <button>Salvar</button>
     </div>
   );
