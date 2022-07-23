@@ -41,7 +41,6 @@ const Home = () => {
   return (
     <div>
         <h1>Login</h1>
-        <button onClick={() => navigate("/")}>Entrar</button>
         <button onClick={() => navigate("/cadastro")}>Não possui cadastro? Clique aqui.</button>
 
         <input placeholder="email" 
