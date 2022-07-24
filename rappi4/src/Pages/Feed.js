@@ -9,9 +9,7 @@ const Feed = () => {
   const navigate = useNavigate();
   const [restaurantes, loading, erro] = useRequestData(`${BASE_URL}/restaurants`)
 
-  // const [products] = restaurantes
-
-  console.log(restaurantes)
+    console.log(restaurantes)
   
   const listaRestaurantes = restaurantes && restaurantes.map((rest) => {
     return <div key={rest.id}>

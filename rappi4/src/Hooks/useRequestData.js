@@ -6,7 +6,7 @@ export function useRequestData(url){
 
 const [data, setData] = useState(undefined);
 const [loading, setLoading] = useState(false);
-const [erro, setErro] = useState(undefined);
+const [erro, setErro] = useState("");
 const token = localStorage.getItem("token");
 
 useEffect(()=>{
@@ -25,14 +25,17 @@ useEffect(()=>{
     });
 }, []);
 
+console.log(data)
     return [data, loading, erro]
 }
+
+
 
 export function useRequestData2(url){
 
     const [data, setData] = useState(undefined);
     const [loading, setLoading] = useState(false);
-    const [erro, setErro] = useState(undefined);
+    const [erro, setErro] = useState("");
     const token = localStorage.getItem("token");
     
     useEffect(()=>{
@@ -43,7 +46,7 @@ export function useRequestData2(url){
                 auth: token
             }
         }).then((response)=>{
-            setData(response.data.restaurant.products);
+            setData(response.data.restaurant);
             setLoading(false);
         }).catch((error)=>{
             setErro(error.response);
@@ -52,4 +55,31 @@ export function useRequestData2(url){
     }, []);
     
         return [data, loading, erro]
-    }
+
+    };
+
+    // export function useRequestData3(url){
+
+    //     const [loading, setLoading] = useState(false);
+    //     const [erro, setErro] = useState("");
+    //     const token = localStorage.getItem("token");
+
+    //     useEffect(() => { 
+    //         setLoading(true);
+
+    //         axios.post(url, {
+    //             headers: {
+    //               auth: token,
+    //             }
+    //           })
+    //         .then(()=>{
+    //           setLoading(false);
+    //         })
+    //         .catch(error => {
+    //         setErro(error.response.data);
+    //           setLoading(false);
+    //         });
+    //       }, []);
+
+    //       return [loading, erro]
+    //     };
