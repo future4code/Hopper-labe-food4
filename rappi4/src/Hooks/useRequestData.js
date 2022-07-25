@@ -17,7 +17,7 @@ useEffect(()=>{
             auth: token
         }
     }).then((response)=>{
-        setData(response.data.restaurants);
+        setData(response.data);
         setLoading(false);
     }).catch((error)=>{
         setErro(error.response);
@@ -58,28 +58,4 @@ export function useRequestData2(url){
 
     };
 
-    // export function useRequestData3(url){
-
-    //     const [loading, setLoading] = useState(false);
-    //     const [erro, setErro] = useState("");
-    //     const token = localStorage.getItem("token");
-
-    //     useEffect(() => { 
-    //         setLoading(true);
-
-    //         axios.post(url, {
-    //             headers: {
-    //               auth: token,
-    //             }
-    //           })
-    //         .then(()=>{
-    //           setLoading(false);
-    //         })
-    //         .catch(error => {
-    //         setErro(error.response.data);
-    //           setLoading(false);
-    //         });
-    //       }, []);
-
-    //       return [loading, erro]
-    //     };
+   

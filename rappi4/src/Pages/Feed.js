@@ -7,11 +7,11 @@ import { BASE_URL } from "../Constants/urls";
 
 const Feed = () => {
   const navigate = useNavigate();
-  const [restaurantes, loading, erro] = useRequestData(`${BASE_URL}/restaurants`)
+  const [data, loading, erro] = useRequestData(`${BASE_URL}/restaurants`)
 
-    console.log(restaurantes)
+  let rest = !!data? data : "carregando"
   
-  const listaRestaurantes = restaurantes && restaurantes.map((rest) => {
+  const listaRestaurantes = rest.restaurants && rest.restaurants.map((rest) => {
     return <div key={rest.id}>
       <img onClick={() => vaiParaDetalhesRestaurante(navigate, rest.id)}
         src={rest.logoUrl}
@@ -32,7 +32,7 @@ const Feed = () => {
 
       {loading && loading && <p>Carregando...</p>}
       {!loading && erro && <p>Deu ruim!</p>}
-      {!loading && restaurantes && restaurantes.length > 0 && listaRestaurantes}
+      {!loading && rest.restaurants && rest.restaurants.length > 0 && listaRestaurantes}
 
     </div>
   );

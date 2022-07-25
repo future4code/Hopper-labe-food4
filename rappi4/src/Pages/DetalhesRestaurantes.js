@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useRequestData2, useRequestData } from "../Hooks/useRequestData";
+import { useRequestData2 } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
 import { vaiParaFeed } from "../Router/RouteFunctions"
 import { useProtectedPage } from "../Hooks/UseProtectPage"
