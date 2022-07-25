@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { vaiParaPerfil } from "../Router/RouteFunctions";
 
 const EditarCadastro = () => {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ const EditarCadastro = () => {
   return (
     <div>
         <h1>Editar Cadastro</h1>
-        <button onClick={() => navigate("/perfil")}>Voltar</button>
+        <button onClick={() => vaiParaPerfil(navigate)}>Voltar</button>
         <button>Salvar</button>
     </div>
   );

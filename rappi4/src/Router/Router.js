@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Feed from "../Pages/Feed"
 import Cadastro from "../Pages/Cadastro"
 import Login from "../Pages/Login"
@@ -20,8 +19,8 @@ const Router = () => {
           <Route path={"/"} element={<Feed />} />
           <Route path={"/cadastro"} element={<Cadastro />} />
           <Route path={"/login"} element={<Login />} />
-          <Route path={"/carrinho"} element={<Carrinho />} />
-          <Route path={"/detalhesRestaurante"} element={<DetalhesRestaurante />} />
+          <Route path={"/carrinho/:id"} element={<Carrinho />} />
+          <Route path={"/detalhesRestaurante/:id"} element={<DetalhesRestaurante />} />
           <Route path={"/editarCadastro"} element={<EditarCadastro />} />
           <Route path={"/editarEndereco"} element={<EditarEndereco />} />
           <Route path={"/perfil"} element={<Perfil />} />

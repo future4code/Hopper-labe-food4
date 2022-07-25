@@ -1,57 +1,41 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
+import {vaiParaCadastro, vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaLogin, vaiParaPerfil} from "../Router/RouteFunctions"
+import { useRequestData } from "../Hooks/useRequestData";
+import { BASE_URL } from "../Constants/urls";
+
 
 const Feed = () => {
   const navigate = useNavigate();
+  const [data, loading, erro] = useRequestData(`${BASE_URL}/restaurants`)
 
-  const [restaurantes, setRestaurantes] =useState([]);
-
-  const receberRestaurantes = () => {
-    axios
-    .get(
-        'https://us-central1-missao-newton.cloudfunctions.net/rappi4B/restaurants',
-        {headers: {
-          'auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlVQRjYxQnUwS2QyMjN3WGJmVkI3IiwibmFtZSI6IkRpZWdvIiwiZW1haWwiOiJkaWVnb0BmdXR1cmU0LmNvbSIsImNwZiI6IjEwMC4xMTEuMTExLTExIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTY1ODE4NDcxMH0.hIi9zTSc7onX6LqITAGCx9k2YUBUQrfJXexA18knjBE',
-          'Content-Type': 'application/json'}
-        })
-    .then(response => {    
-        console.log(response.data.restaurants)
-        setRestaurantes(response.data.restaurants);
-    })
-    .catch(error => {
-        console.log(error.response.data)
-    });
-  }
-
-  useEffect(() => {
-    receberRestaurantes();
-  }, []);
+  let rest = !!data? data : "carregando"
+  
+  const listaRestaurantes = rest.restaurants && rest.restaurants.map((rest) => {
+    return <div key={rest.id}>
+      <img onClick={() => vaiParaDetalhesRestaurante(navigate, rest.id)}
+        src={rest.logoUrl}
+        width="300px" />
+      <h3>{rest.name}</h3>
+    </div>
+  });
 
   return (
-
     <div>
-        <h1>Feed</h1>
-        <button onClick={() => navigate("/login")}>Login</button>
-        <button onClick={() => navigate("/cadastro")}>Cadastro</button>
-        <br></br>
-        <button onClick={() => navigate("/")}>Feed</button>
-        <button onClick={() => navigate("/perfil")}>Perfil</button>
-        <button onClick={() => navigate("/carrinho")}>Carrinho</button>
-        <a onClick={() => navigate("/detalhesRestaurante")}>
-            {restaurantes.map((rest) => {
-              return(
-                <p key={rest.id}>
-                    <img src={rest.logoUrl} width="300px"/>
-                    {rest.name}
-                </p>
-            )})}
-        </a>
-    </div>
+      <h1>Feed</h1>
+      <button onClick={() => vaiParaLogin(navigate)}>Login</button>
+      <button onClick={() => vaiParaCadastro(navigate)}>Cadastro</button>
+      <br></br>
+      <button onClick={() => vaiParaFeed(navigate)}>Feed</button>
+      <button onClick={() => vaiParaPerfil(navigate)}>Perfil</button>
+      <button onClick={() => vaiParaCarrinho(navigate)}>Carrinho</button>
 
+      {loading && loading && <p>Carregando...</p>}
+      {!loading && erro && <p>Deu ruim!</p>}
+      {!loading && rest.restaurants && rest.restaurants.length > 0 && listaRestaurantes}
+
+    </div>
   );
-};
+}
 
 export default Feed;

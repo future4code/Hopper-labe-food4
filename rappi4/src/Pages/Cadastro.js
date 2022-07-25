@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { vaiParaFeed } from "../Router/RouteFunctions";
 
 
 const Cadastro = () => {
@@ -8,7 +9,7 @@ const Cadastro = () => {
   return (
     <div>
         <h1>Cadastro</h1>
-        <button onClick={() => navigate("/")}>Enviar</button>
+        <button onClick={() => vaiParaFeed(navigate)}>Enviar</button>
     </div>
   );
 };
