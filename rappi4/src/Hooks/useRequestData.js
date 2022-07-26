@@ -25,7 +25,7 @@ useEffect(()=>{
     });
 }, []);
 
-console.log(data)
+
     return [data, loading, erro]
 }
 
