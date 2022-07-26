@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants/urls";
+import { vaiParaCadastro, vaiParaLogin } from "../Router/RouteFunctions";
 
 
 const Home = () => {
@@ -41,7 +42,7 @@ const Home = () => {
   return (
     <div>
         <h1>Login</h1>
-        <button onClick={() => navigate("/cadastro")}>Não possui cadastro? Clique aqui.</button>
+
 
         <input placeholder="email" 
         type="email" 
