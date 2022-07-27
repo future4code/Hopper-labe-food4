@@ -1,13 +1,11 @@
 import { GlobalContext } from "./GlobalContext";
 import React, {useState} from "react";
-import { useRequestData2 } from "../Hooks/useRequestData";
-import { BASE_URL } from "../Constants/urls";
-import { useParams } from "react-router-dom";
 
 export const GlobalState = (props) => {
 
     const [carrinho, setCarrinho] = useState([]);
     const [quantity, setQuantidade] = useState(0);
+    
 
     const addCarrinho = (produtos) => {
         const index = carrinho.findIndex((produtoCarrinho) => {
@@ -86,7 +84,7 @@ export const GlobalState = (props) => {
     const dados = {
         addCarrinho, 
         removeCarrinho,
-        selecionaQuantidade
+        selecionaQuantidade,
     }
 
     return (

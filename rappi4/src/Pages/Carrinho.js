@@ -1,10 +1,12 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BASE_URL } from "../Constants/urls";
-import { vaiParaCarrinho, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
+import { vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
 import axios from "axios";
 import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { GlobalContext } from "../Global/GlobalContext";
 import { useParams, useNavigate } from "react-router-dom";
+import { useRequestData2 } from "../Hooks/useRequestData";
+import Banner from 'react-js-banner'
 
 
 export const Carrinho = () => {
@@ -12,107 +14,101 @@ export const Carrinho = () => {
   useProtectedPage();
   const { id } = useParams();
   const { states } = useContext(GlobalContext);
-  const { carrinho, restaurante, loading, erro } = states;
-  const [erro1, setErro1] = useState('')
-  const [payment, setPayment] = useState("")
-  const [moneyCheck, setMoneyCheck] = useState(false)
-  const [cardCheck, setCardCheck] = useState(false)
+  const { carrinho } = states;
+  const [loadingPost, setLoadingPost] = useState(false);
+  const [erroPost, setErroPost] = useState('');
+  const [pagamento, setPagamento] = useState([]);
   const token = localStorage.getItem("token");
-  let rest = restaurante ? restaurante : "carregando"
-  const produtos = rest.products;
   const navigate = useNavigate();
+  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
 
+  let rest = restaurante ? restaurante : "carregando"
   const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }))
-
   const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((prev, curr) => prev + curr, 0);
+  const subTotal = (somaCarrinho + rest.shipping).toFixed(2);
 
-  console.log(`Total do carrinho ${somaCarrinho}`);
-
-  useEffect(() => {
-
+  const enviaPedido = () => {
+    setLoadingPost(true)
     const body = {
       products: carrinhoPost,
-      "paymentMethod": "creditcard"
+      paymentMethod: pagamento
     }
-
     axios.post(`${BASE_URL}/restaurants/${id}/order`, body, {
       headers: {
         auth: token,
       }
-    })
-      .catch(error => {
-        setErro1(error.response.data)
-      });
-  }, []);
-
-  const dinheiro = "money"
-  const cartao = "creditcard"
-
-  const update = () => {
-
+    }).then(response => {
+      setLoadingPost(false)
+    }).catch(error => {
+      setLoadingPost(false)
+      setErroPost(error.response.data)
+    });
   }
 
-  const aux = () => {
-    setCardCheck(false)
-    setMoneyCheck(true)
-    setPayment(dinheiro)
-    update()
+  const listaCarrinho = carrinho && carrinho.map((prato) => {
+    return <div>
+      <p>quantidade {prato.quantity}</p>
+      <img src={prato.photoUrl} width="75px" height="75px"></img>
+      <p>{prato.name}</p>
+      <p>{prato.description}</p>
+      <p>{prato.price}</p>
+     </div>
+  });
 
-  }
-
-  const aux2 = () => {
-    setCardCheck(true)
-    setMoneyCheck(false)
-    setPayment(cartao)
-    update()
-
-  }
-
+  console.log(`Total do carrinho ${somaCarrinho}`);
+  console.log(`subtotal ${subTotal}`);
+  console.log(carrinhoPost)
+  console.log(pagamento)
 
   return (
     <div>
-  <h1>Carrinho</h1>
-  <button onClick={() => vaiParaFeed(navigate)}>Feed</button>
- <button onClick={() => vaiParaPerfil(navigate)}>Perfil</button>
- <button onClick={() => vaiParaCarrinho(navigate)}>Carrinho</button>
-  <br></br>
- <button>Confirmar</button>
- {/* <button onClick={()=>goToDetailPage(navigate)}>Continuar Comprando</button> */}
+      <h1>Carrinho</h1>
+      <button onClick={() => vaiParaFeed(navigate)}>Feed</button>
+      <button onClick={() => vaiParaPerfil(navigate)}>Perfil</button>
+      <button onClick={() => vaiParaCarrinho(navigate)}>Carrinho</button>
+      <br></br>
 
- {/* {endereço da entrega no topo da página, vem do endereço inserido do cliente} */}
-    {/* {listaCarrinho} 
-   endereço do lugar
-    tempo de entrega 30 - 45 min
-   card com o que foi pedido
-     */}
-   {/* {Preço total da compra}  preço frete+
-      preço total*/}
-      {/* {selecionar forma de pagamento} */}
-     {/* {concluir o pedido e exibir um banner de andamento (pedido fica ativo por x minutos, sendo x o tempo de entrega} */}
+      <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
+      <br></br>
 
+      {/* //se carrinho ta vazio não deveria renderizar o restaurante, mas a requisição ta aqui// */}
+      {carrinho && carrinho.length === 0 && <h3>Carrinho vazio</h3>}
+      {carrinho.length === 0 ? "" :
+        <div>
+          <h4>{rest.name}</h4>
+          <p>{rest.address}</p>
+          <p>{`${rest.deliveryTime} min`}</p>
+        </div>}
 
-   {/* //loading// */}
-      {/* {loading && loading && <p>Carregando...</p>}
-    {!loading && erro && <p>Deu ruim!</p>}
-      {!loading && pedidos && pedidos.length > 0 && historicoPedidos}
-    {!loading && pedidos && pedidos.length === 0 && <h3>Carrinho vazio</h3>}  */}
-    <div>
-     {moneyCheck ? <span onClick={() => aux()}> Dinheiro </span> : <span onClick={() => aux()}> Dinheiro </span>}
-  </div>
-   <div>
-      {cardCheck ? <span onClick={() => aux2()}> Cartão de credito </span> : <span onClick={() => aux2()}> Cartão de credito </span>}
-   </div> 
+      <span>
+        {listaCarrinho}
+      </span>
+
+      <div>
+        <h3> {`Frete:R$ ${rest.shipping}`} </h3>
+        <h3>{`SUBTOTAL ${subTotal}`}</h3>
+        <h5>FORMA DE PAGAMENTO</h5>
+        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("money")} />Dinheiro
+        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcart")} />Cartão de Crédito
+        <button onClick={() => enviaPedido()}>Confirmar</button>
+      </div>
+
+      {loadingPost && loadingPost && <p>Carregando...</p>}
+      {!loadingPost && erroPost && <p>Deu ruim!</p>}
+
+      {/* ta certo esse banner, qual o ternário pra ir pra feed e renderizar banner?? */}
+
+      {/* { vaiParaFeed(navigate) &&
+        <Banner visibleTime={rest.deliveryTime}>
+          <div>
+            <h3>Pedido em andamento</h3>
+            <p>{rest.name}</p>
+            <p>{`SUBTOTAL R$ ${subTotal}`}</p>
+          </div>
+        </Banner>
+      } */}
+
     </div>
   );
 };
 
-// export default Carrinho;
-
-// const [loading2, setLoading2] = useState(false);
-// const [erro2, setErro2] = useState("");
-// const token = localStorage.getItem("token");
-
-
-
-{/* {loading2 && loading2 && <p>Carregando...</p>}
-      {!loading2 && erro2 && <p>Deu ruim!</p>} */}
