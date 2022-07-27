@@ -5,6 +5,7 @@ import { vaiParaCarrinho, vaiParaFeed } from "../Router/RouteFunctions"
 import { useProtectedPage } from "../Hooks/UseProtectPage"
 import { useState, useContext } from "react";
 import { GlobalContext } from "../Global/GlobalContext";
+import PopUp1 from "../Components/PopUpDetalhesRest/PopUpDet";
 
 const DetalhesRestaurante = () => {
 
@@ -15,24 +16,30 @@ const DetalhesRestaurante = () => {
   const { states, dados } = useContext(GlobalContext);
   const { carrinho } = states;
   const { addCarrinho, removeCarrinho, selecionaQuantidade } = dados;
-  const [restaurante, loading, erro] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
+  const [restaurante, loading, erro] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
+  const [popUp1, setPopUp1] = useState(false);
   const token = localStorage.getItem("token");
-  let rest = restaurante ? restaurante : "carregando"
+  let rest = restaurante ? restaurante : "carregando";
   const produtos = rest.products;
-
-  //ver ternário ou if/else pra deixar o botão de adicionar e remover renderizado condicionalmente!!
-
   const listaCardapio = produtos && produtos.map((prato) => {
+   
     return (
       <div key={prato.id}>
         <img src={prato.photoUrl} width="75px" height="75px" />
         <p>{prato.name}</p>
         <p>{prato.description}</p>
         <p>{`R$: ${prato.price.toFixed(2)}`}</p>
-        {selecionaQuantidade()}
-        {/* {renderizaBotao} */}
-        <button onClick={() => removeCarrinho(prato)}>remover</button>
-        <p onClick={() => addCarrinho(prato)}>ADICIONAR AO CARRINHO</p>
+        
+        
+        {/* <button onClick={() => removeCarrinho(prato)}>remover</button> */}
+        
+        <button onClick={()=> setPopUp1(true)}>ADICIONAR AO CARRINHO</button>
+
+        {popUp1 ? <PopUp1 trigger={popUp1} setTrigger={setPopUp1}>
+          <button onClick={()=> addCarrinho(prato)}>adicionar</button>
+          {selecionaQuantidade()}
+          
+        </PopUp1> : ""}
       </div>
     )
   });
@@ -63,6 +70,13 @@ const DetalhesRestaurante = () => {
       {!loading && erro && <p>Deu ruim!</p>}
       {!loading && rest.products && rest.products.length > 0 && listaCardapio}
 
+      {/* <button onClick={()=> setPopUp(true)}>ADICIONAR AO CARRINHO</button>
+
+      <PopUp trigger={popUp} setTrigger={setPopUp}>
+      {selecionaQuantidade()}
+        <button onClick={()=> addCarrinho()}>adicionar</button>
+        <h3>Olá</h3>
+      </PopUp> */}
 
 
 

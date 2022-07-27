@@ -6,7 +6,7 @@ import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { GlobalContext } from "../Global/GlobalContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { useRequestData2 } from "../Hooks/useRequestData";
-import Banner from 'react-js-banner'
+import PopUp2 from "../Components/PopUpCarrinho/PopUpCarrinho"
 
 
 export const Carrinho = () => {
@@ -18,6 +18,7 @@ export const Carrinho = () => {
   const [loadingPost, setLoadingPost] = useState(false);
   const [erroPost, setErroPost] = useState('');
   const [pagamento, setPagamento] = useState([]);
+  const [popUp2, setPopUp2] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
@@ -33,15 +34,18 @@ export const Carrinho = () => {
       products: carrinhoPost,
       paymentMethod: pagamento
     }
+    console.log("carrinho", body, token)
     axios.post(`${BASE_URL}/restaurants/${id}/order`, body, {
       headers: {
         auth: token,
+        contentType: "application/json"
       }
-    }).then(response => {
+    }).then((response) => {
       setLoadingPost(false)
+      setPopUp2(true)
     }).catch(error => {
       setLoadingPost(false)
-      setErroPost(error.response.data)
+      setErroPost(error.response)
     });
   }
 
@@ -52,7 +56,7 @@ export const Carrinho = () => {
       <p>{prato.name}</p>
       <p>{prato.description}</p>
       <p>{prato.price}</p>
-     </div>
+    </div>
   });
 
   console.log(`Total do carrinho ${somaCarrinho}`);
@@ -71,8 +75,7 @@ export const Carrinho = () => {
       <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
       <br></br>
 
-      {/* //se carrinho ta vazio não deveria renderizar o restaurante, mas a requisição ta aqui// */}
-      {carrinho && carrinho.length === 0 && <h3>Carrinho vazio</h3>}
+      {carrinho.length === 0 && <h3>Carrinho vazio</h3>}
       {carrinho.length === 0 ? "" :
         <div>
           <h4>{rest.name}</h4>
@@ -84,29 +87,22 @@ export const Carrinho = () => {
         {listaCarrinho}
       </span>
 
-      <div>
-        <h3> {`Frete:R$ ${rest.shipping}`} </h3>
-        <h3>{`SUBTOTAL ${subTotal}`}</h3>
+      <div>{carrinho.length === 0 ? "" :
+        <h3> {`Frete:R$ ${rest.shipping}`} </h3>}
+        {carrinho.length === 0 ? <h3>SUBTOTAL 0,00</h3> : <h3>{`SUBTOTAL ${subTotal}`}</h3>}
         <h5>FORMA DE PAGAMENTO</h5>
         <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("money")} />Dinheiro
-        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcart")} />Cartão de Crédito
+        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcard")} />Cartão de Crédito
         <button onClick={() => enviaPedido()}>Confirmar</button>
       </div>
 
       {loadingPost && loadingPost && <p>Carregando...</p>}
-      {!loadingPost && erroPost && <p>Deu ruim!</p>}
-
-      {/* ta certo esse banner, qual o ternário pra ir pra feed e renderizar banner?? */}
-
-      {/* { vaiParaFeed(navigate) &&
-        <Banner visibleTime={rest.deliveryTime}>
-          <div>
-            <h3>Pedido em andamento</h3>
-            <p>{rest.name}</p>
-            <p>{`SUBTOTAL R$ ${subTotal}`}</p>
-          </div>
-        </Banner>
-      } */}
+      {!loadingPost && erroPost && <p>Ja existe um pedido em andamento!</p>}
+      {popUp2 ? <PopUp2 trigger={popUp2} setTrigger={setPopUp2}>
+        <p>Pedido em Andamento</p>
+        <p>{rest.name}</p>
+        <p>{subTotal}</p>
+      </PopUp2> : ""};
 
     </div>
   );
