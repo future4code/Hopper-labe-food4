@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Feed from "../Pages/Feed"
 import Cadastro from "../Pages/Cadastro"
 import Login from "../Pages/Login"
-import Carrinho from '../Pages/Carrinho';
+import { Carrinho } from '../Pages/Carrinho';
 import DetalhesRestaurante from '../Pages/DetalhesRestaurantes';
 import EditarCadastro from '../Pages/EditarCadastro';
 import EditarEndereco from '../Pages/EditarEndereco';
@@ -12,6 +12,7 @@ import Perfil from '../Pages/Perfil';
 
 
 const Router = () => {
+
   return (
     <>
       <BrowserRouter>

@@ -1,57 +1,68 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { BASE_URL } from "../Constants/urls";
-import { useRequestData } from "../Hooks/useRequestData";
-import { vaiParaCarrinho, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
+import { vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
+import axios from "axios";
+import { useProtectedPage } from "../Hooks/UseProtectPage";
+import { GlobalContext } from "../Global/GlobalContext";
+import { useParams, useNavigate } from "react-router-dom";
+import { useRequestData2 } from "../Hooks/useRequestData";
+import PopUp2 from "../Components/PopUpCarrinho/PopUpCarrinho"
 
 
-const Carrinho = () => {
+export const Carrinho = () => {
 
-  // useProtectedPage();  desbloquear para testar
-
+  useProtectedPage();
+  const { id } = useParams();
+  const { states } = useContext(GlobalContext);
+  const { carrinho } = states;
+  const [loadingPost, setLoadingPost] = useState(false);
+  const [erroPost, setErroPost] = useState('');
+  const [pagamento, setPagamento] = useState([]);
+  const [popUp2, setPopUp2] = useState(false);
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const { id } = useParams
-  
+  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
 
- 
+  let rest = restaurante ? restaurante : "carregando"
+  const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }))
+  const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((prev, curr) => prev + curr, 0);
+  const subTotal = (somaCarrinho + rest.shipping).toFixed(2);
 
-  //get order//
+  const enviaPedido = () => {
+    setLoadingPost(true)
+    const body = {
+      products: carrinhoPost,
+      paymentMethod: pagamento
+    }
+    console.log("carrinho", body, token)
+    axios.post(`${BASE_URL}/restaurants/${id}/order`, body, {
+      headers: {
+        auth: token,
+        contentType: "application/json"
+      }
+    }).then((response) => {
+      setLoadingPost(false)
+      setPopUp2(true)
+    }).catch(error => {
+      setLoadingPost(false)
+      setErroPost(error.response)
+    });
+  }
 
-  // useEffect(() => {
-  //   axios.get(`${BASE_URL}/active-order`, {
-  //     headers: {
-  //       auth: token
-  //     }
-  //   }).then((res) => {
-  //     console.log(res.data)
-  //   }).catch((err) => {
+  const listaCarrinho = carrinho && carrinho.map((prato) => {
+    return <div>
+      <p>quantidade {prato.quantity}</p>
+      <img src={prato.photoUrl} width="75px" height="75px"></img>
+      <p>{prato.name}</p>
+      <p>{prato.description}</p>
+      <p>{prato.price}</p>
+    </div>
+  });
 
-  //   })
-  // }, [])
-
-  //fazer pedido//
-
-  
-  // useEffect(() => { 
-  //   axios.post(`${BASE_URL}/restaurants/${id}/order`,{
-  //       headers: {
-  //         auth: token,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     })
-  //   .then(response => {
-  //     setPedido(response.data.restaurants.products);
-  //   })
-  //   .catch(error => {
-  //     console.log(error.response.data)
-  //   });
-  // }, []);
-
-
-  // const goToDetailPage = (restaurantId) => {
-  //   navigate(`/detalhesRestaurante/${restaurantId}`)
-  // }
-
+  console.log(`Total do carrinho ${somaCarrinho}`);
+  console.log(`subtotal ${subTotal}`);
+  console.log(carrinhoPost)
+  console.log(pagamento)
 
   return (
     <div>
@@ -60,29 +71,40 @@ const Carrinho = () => {
       <button onClick={() => vaiParaPerfil(navigate)}>Perfil</button>
       <button onClick={() => vaiParaCarrinho(navigate)}>Carrinho</button>
       <br></br>
-      <button>Confirmar</button>
-      {/* <button onClick={()=>goToDetailPage(navigate)}>Continuar Comprando</button> */}
 
-      {/* {endereço da entrega no topo da página, vem do endereço inserido do cliente} */}
-      {/* {listaCarrinho} 
-      endereço do lugar
-      tempo de entrega 30 - 45 min
-      card com o que foi pedido
-      */}
-      {/* {Preço total da compra}  preço frete+
-      preço total*/}
-      {/* {selecionar forma de pagamento} */}
-      {/* {concluir o pedido e exibir um banner de andamento (pedido fica ativo por x minutos, sendo x o tempo de entrega} */}
+      <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
+      <br></br>
 
+      {carrinho.length === 0 && <h3>Carrinho vazio</h3>}
+      {carrinho.length === 0 ? "" :
+        <div>
+          <h4>{rest.name}</h4>
+          <p>{rest.address}</p>
+          <p>{`${rest.deliveryTime} min`}</p>
+        </div>}
 
-      {/* //loading// */}
-      {/* {loading && loading && <p>Carregando...</p>}
-      {!loading && erro && <p>Deu ruim!</p>}
-      {!loading && pedidos && pedidos.length > 0 && historicoPedidos}
-      {!loading && pedidos && pedidos.length === 0 && <h3>Carrinho vazio</h3>}  */}
+      <span>
+        {listaCarrinho}
+      </span>
+
+      <div>{carrinho.length === 0 ? "" :
+        <h3> {`Frete:R$ ${rest.shipping}`} </h3>}
+        {carrinho.length === 0 ? <h3>SUBTOTAL 0,00</h3> : <h3>{`SUBTOTAL ${subTotal}`}</h3>}
+        <h5>FORMA DE PAGAMENTO</h5>
+        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("money")} />Dinheiro
+        <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcard")} />Cartão de Crédito
+        <button onClick={() => enviaPedido()}>Confirmar</button>
+      </div>
+
+      {loadingPost && loadingPost && <p>Carregando...</p>}
+      {!loadingPost && erroPost && <p>Ja existe um pedido em andamento!</p>}
+      {popUp2 ? <PopUp2 trigger={popUp2} setTrigger={setPopUp2}>
+        <p>Pedido em Andamento</p>
+        <p>{rest.name}</p>
+        <p>{subTotal}</p>
+      </PopUp2> : ""};
 
     </div>
   );
 };
 
-export default Carrinho;

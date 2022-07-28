@@ -25,7 +25,7 @@ useEffect(()=>{
     });
 }, []);
 
-console.log(data)
+
     return [data, loading, erro]
 }
 
@@ -58,4 +58,3 @@ export function useRequestData2(url){
 
     };
 
-   
