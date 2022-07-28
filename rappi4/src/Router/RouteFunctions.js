@@ -7,6 +7,10 @@ export const vaiParaCadastro = (navigate) => {
     navigate("/cadastro")
 }
 
+export const vaiParaCadastroDeEndereco = (navigate) => {
+    navigate("/endereco")
+}
+
 export const vaiParaLogin = (navigate) => {
     navigate("/login")
 }

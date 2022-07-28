@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants/urls";
-import { vaiParaCadastro, vaiParaLogin } from "../Router/RouteFunctions";
+import { vaiParaCadastro } from "../Router/RouteFunctions";
 
 
 const Home = () => {
@@ -41,9 +41,8 @@ const Home = () => {
 
   return (
     <div>
-        <h1>Login</h1>
-
-
+        <h1>Entrar</h1>
+        
         <input placeholder="email" 
         type="email" 
         value={email} 
@@ -56,6 +55,8 @@ const Home = () => {
         onChange={onChangePassword}
       />
       <button onClick={onSubmitLogin}>Entrar</button>
+      <button onClick={() => vaiParaCadastro(navigate)}>Não possui cadastro? Clique aqui.</button>
+
     </div>
   );
 };
