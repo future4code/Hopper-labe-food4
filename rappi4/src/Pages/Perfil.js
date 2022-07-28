@@ -14,15 +14,23 @@ const Perfil = () => {
   const pedidos = ped.orders;
   console.log(pedidos)
 
-  const historicoPedidos = pedidos && pedidos.map((pedido) => {  
-    return (<div>
-      <p>{pedido.restaurantName}</p>
-      {/* ver como renderizar a data */}
-      <p>{pedido.date}</p> 
-      <h4>{`SUBTOTAL R$ ${parseFloat(pedido.totalPrice).toFixed(2)}`}</h4>
-    </div>
+  const historicoPedidos = pedidos && pedidos.map((pedido) => {
+    let data = pedido.createdAt
+    let dataTime = new Date(data)
+    let options = {
+        year: 'numeric', month: 'numeric', day: 'numeric'
+    }
+    let resultado = dataTime.toLocaleString('pt', options)
+
+    return (
+        <div>
+            <p>{pedido.restaurantName}</p>
+            <p>{resultado}</p>
+            <h4>{`SUBTOTAL R$ ${parseFloat(pedido.totalPrice).toFixed(2)}`}</h4>
+
+        </div>
     )
-  })
+})
 
   return (
     <div>
