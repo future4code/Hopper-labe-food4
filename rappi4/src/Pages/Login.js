@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants/urls";
-import { vaiParaCadastro, vaiParaLogin } from "../Router/RouteFunctions";
+import { vaiParaCadastro } from "../Router/RouteFunctions";
 
 
 const Home = () => {
