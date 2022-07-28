@@ -7,7 +7,7 @@ function PopUp1(props){
     return (
      props.trigger ? 
         <PopUpDiv>
-            <button onClick={()=>props.setTrigger(false)}>close</button>
+            <button onClick={()=>props.setTrigger(false)}>x</button>
             
             {props.children}
         </PopUpDiv>
