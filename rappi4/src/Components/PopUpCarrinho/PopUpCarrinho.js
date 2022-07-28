@@ -7,6 +7,7 @@ function PopUp2(props){
     return (
      props.trigger ? 
         <PopUpDiv>
+            {/* {props.setTempoPopUp2(false)} */}
             {props.children}
         </PopUpDiv>
      : ''

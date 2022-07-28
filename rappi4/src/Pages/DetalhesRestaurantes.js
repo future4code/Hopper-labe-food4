@@ -25,12 +25,12 @@ const DetalhesRestaurante = () => {
 
  
   const listaCardapio = produtos && produtos.map((prato) => {
-    return (<div key={prato.id}>
+       return (<div key={prato.id}>
         <img src={prato.photoUrl} width="75px" height="75px" />
         <p>{prato.name}</p>
         <p>{prato.description}</p>
         <p>{`R$: ${parseFloat(prato.price).toFixed(2)}`}</p>
-         <p>{`quantidade ${prato.quantity}`}</p> 
+         
         {/*///definir como faz, mas não fica no map, pe ele recebe a info depois, ver se faz um estado!*/}
         {selecionaQuantidade()}
         <p onClick={() => addCarrinho(prato)}>ADICIONAR AO CARRINHO</p>
@@ -44,9 +44,9 @@ const DetalhesRestaurante = () => {
       // });
   })
 
-        console.log(carrinho)
+  console.log(carrinho)
 
-      return (
+  return (
       <div>
         <h1>Restaurante</h1>
         <button onClick={() => vaiParaFeed(navigate)}>Voltar</button>
