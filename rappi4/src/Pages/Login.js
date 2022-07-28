@@ -41,9 +41,8 @@ const Home = () => {
 
   return (
     <div>
-        <h1>Login</h1>
-
-
+        <h1>Entrar</h1>
+        
         <input placeholder="email" 
         type="email" 
         value={email} 
@@ -56,6 +55,8 @@ const Home = () => {
         onChange={onChangePassword}
       />
       <button onClick={onSubmitLogin}>Entrar</button>
+      <button onClick={() => vaiParaCadastro(navigate)}>Não possui cadastro? Clique aqui.</button>
+
     </div>
   );
 };
