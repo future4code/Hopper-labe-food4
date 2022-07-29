@@ -1,4 +1,5 @@
 import React from "react";
+import {PopUpDiv} from "./styled";
 
 function PopUp2(props){
     console.log("CHAMOU O POPUP")
@@ -6,8 +7,7 @@ function PopUp2(props){
     return (
      props.trigger ? 
         <PopUpDiv>
-            <button onClick={()=>props.setTrigger(false)}>close</button>
-            
+            {/* {props.setTempoPopUp2(false)} */}
             {props.children}
         </PopUpDiv>
      : ''
