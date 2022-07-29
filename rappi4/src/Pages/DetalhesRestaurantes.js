@@ -30,8 +30,17 @@ const DetalhesRestaurante = () => {
         <p>{prato.name}</p>
         <p>{prato.description}</p>
         <p>{`R$: ${parseFloat(prato.price).toFixed(2)}`}</p>
+
+        {/* <button onClick={() => setPopUp1(true)}>adicionar</button>
+      {popUp1 ? <PopUp1 trigger={popUp1} setTrigger={setPopUp1}>
+          {selecionaQuantidade()}
+          <p onClick={() => addCarrinho(prato.id)}>ADICIONAR AO CARRINHO</p>
+        </PopUp1> : ""} */}
+        
          
         {/*///definir como faz, mas não fica no map, pe ele recebe a info depois, ver se faz um estado!*/}
+        {/* <button onClick={() => removeCarrinho(prato)}>adicionar</button> */}
+        
         {selecionaQuantidade()}
         <p onClick={() => addCarrinho(prato)}>ADICIONAR AO CARRINHO</p>
         <button onClick={() => removeCarrinho(prato)}>remover</button>
@@ -44,7 +53,7 @@ const DetalhesRestaurante = () => {
       // });
   })
 
-  console.log(carrinho)
+  
 
   return (
       <div>
