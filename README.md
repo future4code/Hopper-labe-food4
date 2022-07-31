@@ -52,7 +52,7 @@
 
 <h1>✔️ O que funciona:</h1>
 <br></br>
-<h3>Fluxo de Login/Cadastro</h3>
+<h3>😄 Fluxo de Login/Cadastro</h3>
 <ul>
   <li> É possível criar uma conta, cadastrando seus dados pessoais e seu endereço; </li>
   <li> Caso seja insida alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário recebe uma mensagem de erro; </li>
@@ -60,7 +60,7 @@
 </ul>
  </br>
  
-<h3>Busca e Seleção de Restaurantes</h3>
+<h3> 🍽 Busca e Seleção de Restaurantes</h3>
 <ul>
   <li> Lista com todos os restaurantes; </li>
   <li> Buscar um restaurante por nome;</li>
@@ -69,7 +69,7 @@
 </ul>
  <br></br>
  
-<h3>Cardápio do Restaurante</h3>
+<h3> 🌮 Cardápio do Restaurante</h3>
 <ul>
   <li>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); </li>
   <li>Pratos do restaurante, divididos em categorias; </li>
@@ -78,7 +78,7 @@
   <li> É possível remover itens do carrinho; </li>
 </ul>
 
-<h3>Carrinho e Finalizar Compra</h3>
+<h3> 🛒 Carrinho e Finalizar Compra</h3>
 <ul>
   <li> Lista de itens que adicionou ao carrinho. Caso não tenha adicionado nenhum item, aparece a mensagem de "Carrinho Vazio"; </li>
   <li>No topo da tela, tem o endereço de entrega; </li>
@@ -88,7 +88,7 @@
 </ul>
 <br></br>
 
-<h3>Perfil, Editar Perfil e Histórico de Pedidos</h3>
+<h3> 😀 Perfil, Editar Perfil e Histórico de Pedidos</h3>
 <ul>
   <li> O usuário é capaz de visualizar seus dados pessoais e endereço;</li>
   <li> O usuário é capaz de editar seus dados pessoais e endereço;</li>
