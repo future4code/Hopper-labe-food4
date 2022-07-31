@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import {vaiParaCadastro, vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaLogin, vaiParaPerfil} from "../Router/RouteFunctions"
 import { useRequestData } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
+import { useProtectedPage } from "../Hooks/UseProtectPage";
 
+//Desativado para os testes
+//useProtectedPage() 
 
 const Feed = () => {
   const navigate = useNavigate();

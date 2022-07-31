@@ -43,13 +43,13 @@ const Home = () => {
     <div>
         <h1>Entrar</h1>
         
-        <input placeholder="email" 
+        <input placeholder="E-mail" 
         type="email" 
         value={email} 
         onChange={onChangeEmail}
       />
 
-      <input placeholder="senha" 
+      <input placeholder="Senha" 
         type="password"
         value={password}
         onChange={onChangePassword}
