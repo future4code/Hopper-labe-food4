@@ -92,10 +92,10 @@ const DetalhesRestaurante = () => {
         {/*///definir como faz, mas não fica no map, pe ele recebe a info depois, ver se faz um estado!*/}
         {/* <button onClick={() => removeCarrinho(prato)}>adicionar</button> */}
         
-        {selecionaQuantidade()}
+      {/*  {selecionaQuantidade()}
         <p onClick={() => addCarrinho(prato)}>ADICIONAR AO CARRINHO</p>
         <button onClick={() => removeCarrinho(prato)}>remover</button>
-      </div>
+      </div> */}
       )
       // .filter((prato) => {
       //   return prato.category === "Bebida" &&
@@ -105,7 +105,7 @@ const DetalhesRestaurante = () => {
   })
 
   
-
+{/*
   return (
       <div>
         <h1>Restaurante</h1>
@@ -135,7 +135,7 @@ const DetalhesRestaurante = () => {
         {loading && loading && <p>Carregando...</p>}
         {!loading && erro && <p>Deu ruim!</p>}
         {!loading && rest.products && rest.products.length > 0 && listaCardapio}
-
+*/}
         {/* <button onClick={()=> setPopUp(true)}>ADICIONAR AO CARRINHO</button>
 
       <PopUp trigger={popUp} setTrigger={setPopUp}>
