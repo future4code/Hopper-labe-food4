@@ -8,20 +8,29 @@ import { vaiParaFeed, vaiParaPerfil, vaiParaCarrinho, vaiParaEditarCadastro, vai
 const Perfil = () => {
   const navigate = useNavigate();
 
-  const [pedidos, loading, erro] = useRequestData(`${BASE_URL}/orders/history`);
+  const [pedido, loading, erro] = useRequestData(`${BASE_URL}/orders/history`);
 
+  const ped = !!pedido ? pedido : "carregando";
+  const pedidos = ped.orders;
   console.log(pedidos)
 
-  const historicoPedidos = pedidos && pedidos.map((pedido) => {  //arrumar conforme os dados corretos da api
-    return (<div>
-      <h3>{pedido.name}</h3>
-      <p>{pedido.date}</p>
-      <h2>{`SUBTOTAL R$ ${pedido.total}`}</h2>
-    </div>
+  const historicoPedidos = pedidos && pedidos.map((pedido) => {
+    let data = pedido.createdAt
+    let dataTime = new Date(data)
+    let options = {
+        year: 'numeric', month: 'numeric', day: 'numeric'
+    }
+    let resultado = dataTime.toLocaleString('pt', options)
+
+    return (
+        <div>
+            <p>{pedido.restaurantName}</p>
+            <p>{resultado}</p>
+            <h4>{`SUBTOTAL R$ ${parseFloat(pedido.totalPrice).toFixed(2)}`}</h4>
+
+        </div>
     )
-  })
-
-
+})
 
   return (
     <div>

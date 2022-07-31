@@ -4,7 +4,7 @@ export const PopUpDiv = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    width: 100px;
+    width: 70%;
     height: 100px;
 
     background-color: orange;
