@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img width="300px" height="150px" alt="Rappi4B" src=![rappi4](https://user-images.githubusercontent.com/98128470/182042939-6748e320-d765-4335-baf6-0993babbdd8f.jpg) />
+    <img width="300px" height="150px" alt="Rappi4B" src=(https://user-images.githubusercontent.com/98128470/182042939-6748e320-d765-4335-baf6-0993babbdd8f.jpg) />
     <br>
    LabeFood - Rappi4-B
 </h1>
@@ -9,14 +9,13 @@
 
 
 ### Integrantes:
-<table>
+<table align="center">
   <tr>
        <th>Diego Souza Motta</th>
        <th>Maicon Miranda de Jesus</th>
         <th>Priscilla L. de Oliveira Ramos</th>
         <th>Wagner Luiz da Silva Guimarães</th>
-  
-  </tr>
+    </tr>
   <tr>
     <td>
   <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02UXL7VALW-9bfb7dda36d4-512' >
@@ -30,13 +29,29 @@
      <td>
   <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02V4BLK3MZ-263eefdcc95d-512' >
     </td>
-   
-  </tr>
+ </tr>
 <table>
+</br>
+</br>   
 
 Link do Surge: 
     
- <br></br>
+</br>
+</br>
+    
+<h1>Tecnologias Utilizadas:</h1>
+<br></br>
+ <ul>
+  <li>React; </li>   
+  <li> Aplicações com múltiplas rotas utilizando React Router; </li>
+  <li>Autenticação; </li> 
+  <li>Uso de bibliotecas de UI; </li> 
+  <li>Formulários com Validação; </li>   
+  <li>Hooks useState e useEffect.</li>  
+</ul>   
+</br>
+</br>
+
 <h1>O que funciona:</h1>
 <br></br>
 <h3>Fluxo de Login/Cadastro</h3>
@@ -46,7 +61,8 @@ Link do Surge:
   <li> </li>
   <li> </li>
 </ul>
- <br></br>
+ </br>
+ 
 <h3>Busca e Seleção de Restaurantes</h3>
 <ul>
   <li> </li>
@@ -55,6 +71,7 @@ Link do Surge:
   <li> </li>
 </ul>
  <br></br>
+ 
 <h3>Cardápio do Restaurante</h3>
 <ul>
   <li>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); </li>
@@ -70,9 +87,10 @@ Link do Surge:
   <li>No topo da tela, tem o endereço de entrega; </li>
   <li> Contém o preço total da compra; </li>
   <li> Possível selecionar formas de pagamento entre dinheiro e Cartão de Crédido; </li>
-    <li>Ao concluir o pedido é exibido um banner de "Pedido em andamento" com os detalhes do pedido;</li>
+  <li>Ao concluir o pedido é exibido um banner de "Pedido em andamento" com os detalhes do pedido;</li>
 </ul>
-     <br></br>
+<br></br>
+
 <h3>Perfil, Editar Perfil e Histórico de Pedidos</h3>
 <ul>
   <li> </li>
@@ -80,5 +98,10 @@ Link do Surge:
   <li> </li>
   <li> </li>
 </ul>
-  <br></br>
-O que não funciona: 
+<br></br>
+
+<h1>O que não funciona: </h1>
+<br></br>
+<h3>Carrinho e Finalizar Compra</h3>
+<ul>
+  <li>Ao concluir o banner de "Pedido em andamento" não fecha após o tempo de entrega finalizar;</li>
