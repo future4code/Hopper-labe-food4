@@ -56,11 +56,11 @@ Link do Surge:
 
 <h3>Cardápio do Restaurante</h3>
 <li>
-  <ul>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); </ul>
-   <ul>Pratos do restaurante, divididos em categorias; </ul>
-    <ul>Informações de cada prato (foto, nome, descrição, preço); </ul>
-     <ul>Adiciona pratos no carrinho selecionando a quantidade de cada prato; </ul>
-     <ul> É possível remover itens do carrinho; </ul>
+  <ul>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); 
+   Pratos do restaurante, divididos em categorias; 
+    Informações de cada prato (foto, nome, descrição, preço); 
+     Adiciona pratos no carrinho selecionando a quantidade de cada prato; 
+      É possível remover itens do carrinho; </ul>
 </li>
 
 <h3>Carrinho e Finalizar Compra</h3>
