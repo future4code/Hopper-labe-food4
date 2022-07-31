@@ -20,7 +20,7 @@
   <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02V4AL6GAW-55c7d679189d-512' >
     </td>
         <td width="25%">
-  <img width='150px' height='150px' src='https://avatars.githubusercontent.com/u/98128470?s=400&u=6af044abbfa69740d33d5dc66626487d6f4f731b&v=4' >
+  <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02V1D7HJ2Z-ac7df3a4cba3-512' >
     </td>
      <td width="25%">
   <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02V4BLK3MZ-263eefdcc95d-512' >
