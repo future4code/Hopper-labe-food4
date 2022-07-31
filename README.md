@@ -51,7 +51,9 @@
 </br>
 
 <h1>✔️ O que funciona:</h1>
-<br></br>
+</br>
+</br>
+
 <h3>😄 Fluxo de Login/Cadastro</h3>
 <ul>
   <li> É possível criar uma conta, cadastrando seus dados pessoais e seu endereço; </li>
@@ -67,7 +69,7 @@
   <li> Filtrar os restaurantes por categoria;</li>
   <li> É possível clicar no card de um restaurante para visualizar a tela com seu cardápio;</li>
 </ul>
- <br></br>
+ </br>
  
 <h3> 🌮 Cardápio do Restaurante</h3>
 <ul>
@@ -77,6 +79,7 @@
   <li>Adiciona pratos no carrinho selecionando a quantidade de cada prato; </li>
   <li> É possível remover itens do carrinho; </li>
 </ul>
+</br>
 
 <h3> 🛒 Carrinho e Finalizar Compra</h3>
 <ul>
@@ -86,7 +89,7 @@
   <li> Possível selecionar formas de pagamento entre dinheiro e Cartão de Crédido; </li>
   <li>Ao concluir o pedido é exibido um banner de "Pedido em andamento" com os detalhes do pedido;</li>
 </ul>
-<br></br>
+</br>
 
 <h3> 😀 Perfil, Editar Perfil e Histórico de Pedidos</h3>
 <ul>
@@ -95,10 +98,11 @@
   <li> Ao editar as informações, caso insira alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário recebe uma mensagem de erro;</li>
   <li> O usuário é capaz de visualizar o histórico de pedidos concluídos;</li>
 </ul>
-<br></br>
+</br>
 
 <h1>🚧 O que não funciona: </h1>
-<br></br>
+</br>
+</br>
 <h3>Carrinho e Finalizar Compra</h3>
 <ul>
   <li>Ao concluir o banner de "Pedido em andamento" não fecha após o tempo de entrega finalizar;</li>
