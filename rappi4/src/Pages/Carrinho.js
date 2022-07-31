@@ -20,7 +20,6 @@ export const Carrinho = () => {
   const [erroPost, setErroPost] = useState('');
   const [pagamento, setPagamento] = useState([]);
   const [tempoPopUp2, setTempoPopUp2] = useState(false);
-  // const [cont, setCont] = useState(false); retirar
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
@@ -31,45 +30,31 @@ export const Carrinho = () => {
 
 
   const setaTempo = () => {
-    console.log("comecei")
     setTempoPopUp2(!tempoPopUp2)
     setTimeout(() => {
-      console.log("fechei")
-    }, (rest.deliveryTime * 1000))
+    }, (rest.deliveryTime * 60000))
     setTempoPopUp2(!tempoPopUp2)
   }
 
   const enviaPedido = () => {
-    // setLoadingPost(true)
-    // const body = {
-    //   products: carrinhoPost,
-    //   paymentMethod: pagamento
-    // }
-    // axios.post(`${BASE_URL}/restaurants/${id}/order`, body, {
-    //   headers: {
-    //     auth: token,
-    //     contentType: "application/json"
-    //   }
-    // }).then((response) => {
-
-    setaTempo();
-    setLoadingPost(false);
-    // }).catch(error => {
-    //   setLoadingPost(false)
-    //   setErroPost(error.response)
-    // });
+    setLoadingPost(true)
+    const body = {
+      products: carrinhoPost,
+      paymentMethod: pagamento
+    }
+    axios.post(`${BASE_URL}/restaurants/${id}/order`, body, {
+      headers: {
+        auth: token,
+        contentType: "application/json"
+      }
+    }).then((response) => {
+      setaTempo();
+      setLoadingPost(false);
+    }).catch(error => {
+      setLoadingPost(false)
+      setErroPost(error.response)
+    });
   }
-
-  // useEffect(()=>{
-  //   setTempoPopUp2(!tempoPopUp2);
-  //   window.setTimeout(() => {
-  //     setTempoPopUp2(!tempoPopUp2)
-  //     console.log("fechei")
-  //     console.log(tempoPopUp2)
-  //   }, (rest.deliveryTime * 1000))
-  // },[cont, loadingPost])
-
-  const PopUpCarrinho = () => { }
 
   const listaCarrinho = carrinho && carrinho.map((prato) => {
     return <div key={prato.id}>
@@ -116,15 +101,13 @@ export const Carrinho = () => {
       {loadingPost && loadingPost && <p>Carregando...</p>}
       {!loadingPost && erroPost && <p>Ja existe um pedido em andamento!</p>}
       {tempoPopUp2 &&
-       (<PopUp2 trigger={tempoPopUp2} setTrigger={setTempoPopUp2}>
-       <div>
-         <p>Pedido em Andamento</p>
-         <p>{rest.name}</p>
-         <p>{`Subtotal R$ ${subTotal}`}</p>
-       </div>
-     </PopUp2>)}
-
-
+        (<PopUp2 trigger={tempoPopUp2} setTrigger={setTempoPopUp2}>
+          <div>
+            <p>Pedido em Andamento</p>
+            <p>{rest.name}</p>
+            <p>{`Subtotal R$ ${subTotal}`}</p>
+          </div>
+        </PopUp2>)}
 
     </div>
   );
