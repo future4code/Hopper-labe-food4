@@ -23,7 +23,7 @@ const CadastrarEndereco = () => {
   const onSubmitForm = (event) => {
     event.preventDefault()
     console.log(form)
-    //clear()
+    clear()
   }
 
   const onSubmitEndereço = () => {
