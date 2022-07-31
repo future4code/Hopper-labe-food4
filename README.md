@@ -10,13 +10,13 @@
 
 ### Integrantes:
 <table align="center" width="500px" border="1px">
-  <tr width="25%" height="12%">
+  <tr align="center" width="25%" height="12%">
        <th>Diego Souza Motta</th>
        <th>Maicon Miranda de Jesus</th>
         <th>Priscilla L. de Oliveira Ramos</th>
         <th>Wagner Luiz da Silva Guimarães</th>
     </tr>
-  <tr>
+  <tr align="center">
     <td width="25%">
   <img width='150px' height='150px' src='https://ca.slack-edge.com/TLAVDH7C2-U02UXL7VALW-9bfb7dda36d4-512' >
     </td>
