@@ -9,7 +9,7 @@
 
 
 ### Integrantes:
-<table align="center">
+<table align="center" width="467" border="1px">
   <tr>
        <th>Diego Souza Motta</th>
        <th>Maicon Miranda de Jesus</th>
@@ -39,7 +39,7 @@ Link do Surge:
 </br>
 </br>
     
-<h1>Tecnologias Utilizadas:</h1>
+<h1>🛠️ Tecnologias Utilizadas:</h1>
 <br></br>
  <ul>
   <li>React; </li>   
@@ -52,7 +52,7 @@ Link do Surge:
 </br>
 </br>
 
-<h1>O que funciona:</h1>
+<h1>✔️ O que funciona:</h1>
 <br></br>
 <h3>Fluxo de Login/Cadastro</h3>
 <ul>
@@ -100,7 +100,7 @@ Link do Surge:
 </ul>
 <br></br>
 
-<h1>O que não funciona: </h1>
+<h1>🚧 O que não funciona: </h1>
 <br></br>
 <h3>Carrinho e Finalizar Compra</h3>
 <ul>
