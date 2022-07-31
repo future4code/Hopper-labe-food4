@@ -23,8 +23,59 @@ const DetalhesRestaurante = () => {
   let rest = restaurante ? restaurante : "carregando";
   const produtos = rest.products;
 
- 
-  const listaCardapio = produtos && produtos.map((prato) => {
+  
+
+  
+  const categorias = ([...new Map(produtos && produtos.map(item =>[item["category"], item])).values()]).map((categoria) => {
+    return <div key={categoria.id}>
+      <h2>{categoria.category}</h2>
+      {produtos.filter((cat) => {if (cat.category == categoria.category){return cat}}).map((prato) => {
+        return (
+          <div key={prato.id}>
+            <img src={prato.photoUrl} width="75px" height="75px"/>
+            <p>{prato.name}</p>
+            <p>{prato.description}</p>
+            <p>{`R$: ${prato.price.toFixed(2)}`}</p>
+            <button onClick={()=> setPopUp1(true)}>ADICIONAR AO CARRINHO</button>
+            {popUp1 ? <PopUp1 trigger={popUp1} setTrigger={setPopUp1}>
+            <button onClick={()=> addCarrinho(prato)}>adicionar</button>
+            {selecionaQuantidade()}</PopUp1> : ""}
+          </div>
+        )
+      })}
+    </div>})
+  
+  
+
+  return (
+    <div>
+      <h1>Restaurante</h1>
+      <button onClick={() => vaiParaFeed(navigate)}>Voltar</button>
+      <button onClick={() => vaiParaCarrinho(navigate, rest.id)}>Carrinho</button>
+      <br></br>
+      <img src={rest.logoUrl} alt={rest.name} width="20%" />
+      <h4>{rest.name}</h4>
+      <p>{rest.category}</p>
+      <p>{`${rest.deliveryTime} min`}</p><p>{`Frete: R$ ${rest.shipping}`}</p>
+      <p>{rest.address}</p>
+
+      {loading && loading && <p>Carregando...</p>}
+      {!loading && erro && <p>Deu ruim!</p>}
+      {!loading && rest.products && rest.products.length > 0 && categorias}
+
+
+      </div>
+      );
+};
+
+      export default DetalhesRestaurante;
+
+
+      //botões de POPUP
+      
+      // parte priscilla:
+      
+       {/* const listaCardapio = produtos && produtos.map((prato) => {
        return (<div key={prato.id}>
         <img src={prato.photoUrl} width="75px" height="75px" />
         <p>{prato.name}</p>
@@ -41,10 +92,10 @@ const DetalhesRestaurante = () => {
         {/*///definir como faz, mas não fica no map, pe ele recebe a info depois, ver se faz um estado!*/}
         {/* <button onClick={() => removeCarrinho(prato)}>adicionar</button> */}
         
-        {selecionaQuantidade()}
+      {/*  {selecionaQuantidade()}
         <p onClick={() => addCarrinho(prato)}>ADICIONAR AO CARRINHO</p>
         <button onClick={() => removeCarrinho(prato)}>remover</button>
-      </div>
+      </div> */}
       )
       // .filter((prato) => {
       //   return prato.category === "Bebida" &&
@@ -54,7 +105,7 @@ const DetalhesRestaurante = () => {
   })
 
   
-
+{/*
   return (
       <div>
         <h1>Restaurante</h1>
@@ -84,7 +135,7 @@ const DetalhesRestaurante = () => {
         {loading && loading && <p>Carregando...</p>}
         {!loading && erro && <p>Deu ruim!</p>}
         {!loading && rest.products && rest.products.length > 0 && listaCardapio}
-
+*/}
         {/* <button onClick={()=> setPopUp(true)}>ADICIONAR AO CARRINHO</button>
 
       <PopUp trigger={popUp} setTrigger={setPopUp}>
@@ -92,17 +143,8 @@ const DetalhesRestaurante = () => {
         <button onClick={()=> addCarrinho()}>adicionar</button>
         <h3>Olá</h3>
       </PopUp> */}
-
-
-
-      </div>
-      );
-};
-
-      export default DetalhesRestaurante;
-
-
-      //botões de POPUP
+      
+      */}
 
       {/* <button onClick={() => setPopUp1(true)}>adicionar</button> */}
       {/* {popUp1 ? <PopUp1 trigger={popUp1} setTrigger={setPopUp1}>
