@@ -1,18 +1,17 @@
 import React from "react";
 
-import {PopUpDiv} from "./styled";
+import { PopUpDiv } from "./styled";
 
 
-function PopUp2(props){
-    console.log("CHAMOU O POPUP")
-    console.log(props.trigger)
+function PopUp2(props) {
     return (
-     props.trigger ? 
-        <PopUpDiv>
-            {/* {props.setTempoPopUp2(false)} */}
-            {props.children}
-        </PopUpDiv>
-     : ''
+        <div>
+            {props.trigger ?
+                <PopUpDiv>
+                    {props.children}
+                </PopUpDiv>
+                : ''}
+        </div>
     )
 
 }

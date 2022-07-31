@@ -7,13 +7,10 @@ import { vaiParaFeed, vaiParaPerfil, vaiParaCarrinho, vaiParaEditarCadastro, vai
 
 const Perfil = () => {
   const navigate = useNavigate();
-
   const [pedido, loading, erro] = useRequestData(`${BASE_URL}/orders/history`);
-
   const ped = !!pedido ? pedido : "carregando";
   const pedidos = ped.orders;
-  console.log(pedidos)
-
+ 
   const historicoPedidos = pedidos && pedidos.map((pedido) => {
     let data = pedido.createdAt
     let dataTime = new Date(data)

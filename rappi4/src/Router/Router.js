@@ -9,9 +9,7 @@ import DetalhesRestaurante from '../Pages/DetalhesRestaurantes';
 import EditarCadastro from '../Pages/EditarCadastro';
 import EditarEndereco from '../Pages/EditarEndereco';
 import Perfil from '../Pages/Perfil';
-
-
-
+import { Erro } from '../Pages/Erro';
 
 const Router = () => {
 
@@ -28,6 +26,7 @@ const Router = () => {
           <Route path={"/editarCadastro"} element={<EditarCadastro />} />
           <Route path={"/editarEndereco"} element={<EditarEndereco />} />
           <Route path={"/perfil"} element={<Perfil />} />
+          <Route path={"*"} element={<Erro />} />
         </Routes>
       </BrowserRouter>
     </>
