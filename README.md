@@ -35,47 +35,50 @@
 <table>
 
 Link do Surge: 
-
+    
+ <br></br>
 <h1>O que funciona:</h1>
 <br></br>
 <h3>Fluxo de Login/Cadastro</h3>
-<li>
-  <ul> </ul>
-   <ul> </ul>
-    <ul> </ul>
-     <ul> </ul>
-</li>
-
+<ul>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+</ul>
+ <br></br>
 <h3>Busca e Seleção de Restaurantes</h3>
-<li>
-  <ul> </ul>
-   <ul> </ul>
-    <ul> </ul>
-     <ul> </ul>
-</li>
-
+<ul>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+</ul>
+ <br></br>
 <h3>Cardápio do Restaurante</h3>
-<li>
-  <ul>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); 
-   Pratos do restaurante, divididos em categorias; 
-    Informações de cada prato (foto, nome, descrição, preço); 
-     Adiciona pratos no carrinho selecionando a quantidade de cada prato; 
-      É possível remover itens do carrinho; </ul>
-</li>
+<ul>
+  <li>Informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço); </li>
+  <li>Pratos do restaurante, divididos em categorias; </li>
+  <li> Informações de cada prato (foto, nome, descrição, preço); </li>
+  <li>Adiciona pratos no carrinho selecionando a quantidade de cada prato; </li>
+  <li> É possível remover itens do carrinho; </li>
+</ul>
 
 <h3>Carrinho e Finalizar Compra</h3>
-<li>
-  <ul> </ul>
-   <ul> </ul>
-    <ul> </ul>
-     <ul> </ul>
-</li>
-
+<ul>
+  <li> Lista de itens que adicionou ao carrinho. Caso não tenha adicionado nenhum item, aparece a mensagem de "Carrinho Vazio"; </li>
+  <li>No topo da tela, tem o endereço de entrega; </li>
+  <li> Contém o preço total da compra; </li>
+  <li> Possível selecionar formas de pagamento entre dinheiro e Cartão de Crédido; </li>
+    <li>Ao concluir o pedido é exibido um banner de "Pedido em andamento" com os detalhes do pedido;</li>
+</ul>
+     <br></br>
 <h3>Perfil, Editar Perfil e Histórico de Pedidos</h3>
-<li>
-  <ul> </ul>
-   <ul> </ul>
-    <ul> </ul>
-     <ul> </ul>
-</li>
+<ul>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+</ul>
+  <br></br>
 O que não funciona: 
