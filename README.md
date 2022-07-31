@@ -1,8 +1,4 @@
-<h1 align="center">
-    <img width="300px" height="150px" alt="Rappi4B" src=(https://user-images.githubusercontent.com/98128470/182042939-6748e320-d765-4335-baf6-0993babbdd8f.jpg) />
-    <br>
-   LabeFood - Rappi4-B
-</h1>
+<h1 align="center">  🍔 LabeFood - Rappi4-B 🍔 </h1>
 <br/>
 <br/>
 
@@ -34,7 +30,7 @@
 </br>
 </br>   
 
-Link do Surge: 
+<h2>🚀 Link do Surge: </h2>
     
 </br>
 </br>
@@ -56,19 +52,18 @@ Link do Surge:
 <br></br>
 <h3>Fluxo de Login/Cadastro</h3>
 <ul>
-  <li> </li>
-  <li> </li>
-  <li> </li>
-  <li> </li>
+  <li> É possível criar uma conta, cadastrando seus dados pessoais e seu endereço; </li>
+  <li> Caso seja insida alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário recebe uma mensagem de erro; </li>
+  <li> Após finalizar o cadastro, o usuário é redirecionado para a tela de lista de restaurantes;</li>
 </ul>
  </br>
  
 <h3>Busca e Seleção de Restaurantes</h3>
 <ul>
-  <li> </li>
-  <li> </li>
-  <li> </li>
-  <li> </li>
+  <li> Lista com todos os restaurantes; </li>
+  <li> Buscar um restaurante por nome;</li>
+  <li> Filtrar os restaurantes por categoria;</li>
+  <li> É possível clicar no card de um restaurante para visualizar a tela com seu cardápio;</li>
 </ul>
  <br></br>
  
@@ -93,10 +88,10 @@ Link do Surge:
 
 <h3>Perfil, Editar Perfil e Histórico de Pedidos</h3>
 <ul>
-  <li> </li>
-  <li> </li>
-  <li> </li>
-  <li> </li>
+  <li> O usuário é capaz de visualizar seus dados pessoais e endereço;</li>
+  <li> O usuário é capaz de editar seus dados pessoais e endereço;</li>
+  <li> Ao editar as informações, caso insira alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário recebe uma mensagem de erro;</li>
+  <li> O usuário é capaz de visualizar o histórico de pedidos concluídos;</li>
 </ul>
 <br></br>
 
