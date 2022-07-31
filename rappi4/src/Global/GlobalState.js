@@ -17,12 +17,13 @@ export const GlobalState = (props) => {
         });
     
         if (index === -1) {
+          alert("Adicionado ao carrinho!");
           const produtoComQuantidade = {
             ...produtos, quantity: quantity, precoTotalItem: quantity * produtos.price
           };
           const copiaCarrinho = [...carrinho, produtoComQuantidade];
           setCarrinho(copiaCarrinho);
-        } else {
+          } else {
           const copiaCarrinho = carrinho.map((produtoCarrinho) => {
             if (produtoCarrinho.id === produtos.id) {
               return {

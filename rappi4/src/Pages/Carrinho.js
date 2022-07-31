@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BASE_URL } from "../Constants/urls";
 import { vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
 import axios from "axios";
 import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { GlobalContext } from "../Global/GlobalContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { useRequestData2 } from "../Hooks/useRequestData";
+import { useRequestData2, useRequestData } from "../Hooks/useRequestData";
 import PopUp2 from "../Components/PopUpCarrinho/PopUpCarrinho"
-import Feed from "./Feed"
-
 
 export const Carrinho = () => {
 
@@ -22,12 +20,14 @@ export const Carrinho = () => {
   const [tempoPopUp2, setTempoPopUp2] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`)
-  let rest = restaurante ? restaurante : "carregando"
-  const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }))
+  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
+  let rest = restaurante ? restaurante : "carregando";
+  const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }));
   const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((prev, curr) => prev + curr, 0);
   const subTotal = (somaCarrinho + rest.shipping).toFixed(2);
-
+  const [enderecos] = useRequestData(`${BASE_URL}/profile/address`);
+  let end = !!enderecos? enderecos : "carregando";
+  let endereco = !!end.address? end.address : "carregando";
 
   const setaTempo = () => {
     setTempoPopUp2(!tempoPopUp2)
@@ -59,7 +59,7 @@ export const Carrinho = () => {
   const listaCarrinho = carrinho && carrinho.map((prato) => {
     return <div key={prato.id}>
       <p>quantidade {prato.quantity}</p>
-      <img src={prato.photoUrl} width="75px" height="75px"></img>
+      <img src={prato.photoUrl} width="75px" height="75px" alt={prato.name}></img>
       <p>{prato.name}</p>
       <p>{prato.description}</p>
       <p>{`R$: ${parseFloat(prato.precoTotalItem).toFixed(2)}`}</p>
@@ -76,10 +76,14 @@ export const Carrinho = () => {
 
       <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
       <br></br>
+      
+      <div>
+      <p>{`Endereço de entrega: ${endereco.street}, ${endereco.number}`}</p>
+      </div>
 
       {carrinho.length === 0 && <h3>Carrinho vazio</h3>}
       {carrinho.length > 0 &&
-        <div>
+          <div>
           <h4>{rest.name}</h4>
           <p>{rest.address}</p>
           <p>{`${rest.deliveryTime} min`}</p>

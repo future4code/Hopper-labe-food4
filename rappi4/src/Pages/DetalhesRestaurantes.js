@@ -5,7 +5,6 @@ import { vaiParaCarrinho, vaiParaFeed } from "../Router/RouteFunctions"
 import { useProtectedPage } from "../Hooks/UseProtectPage"
 import { useState, useContext } from "react";
 import { GlobalContext } from "../Global/GlobalContext";
-import PopUp1 from "../Components/PopUpDetalhesRest/PopUpDet";
 
 const DetalhesRestaurante = () => {
 
@@ -17,9 +16,6 @@ const DetalhesRestaurante = () => {
   const { carrinho } = states;
   const { addCarrinho, removeCarrinho, selecionaQuantidade } = dados;
   const [restaurante, loading, erro] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
-  const [quantidadePrato, setQuantidadePrato] = useState()
-  const [popUp1, setPopUp1] = useState(false);
-  const token = localStorage.getItem("token");
   let rest = restaurante ? restaurante : "carregando";
   const produtos = rest.products;
 
