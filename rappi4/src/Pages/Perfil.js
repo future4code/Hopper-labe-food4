@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants/urls";
 import { useRequestData } from "../Hooks/useRequestData";
 import axios from "axios";
+import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { vaiParaFeed, vaiParaPerfil, vaiParaCarrinho, vaiParaEditarCadastro, vaiParaEditarEndereco } from "../Router/RouteFunctions";
 
 
@@ -10,7 +11,7 @@ import { vaiParaFeed, vaiParaPerfil, vaiParaCarrinho, vaiParaEditarCadastro, vai
 
 
 const Perfil = () => {
-
+  useProtectedPage()
 
   //Perfil do usuário
 

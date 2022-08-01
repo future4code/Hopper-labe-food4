@@ -30,17 +30,19 @@ const CadastrarEndereco = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`${BASE_URL}/profile/address`, form, {
+      .put(`${BASE_URL}/address`, form, {
         headers: {
           auth: token,
+          'Content-Type': 'application/json'
         }
       })
       .then((res) => {
         console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
         navigate("/perfil");
       })
       .catch((err) => {
-        console.log(err.response.token);
+        console.log(err.response.data);
       });
   }
 
