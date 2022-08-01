@@ -4,9 +4,12 @@ import {vaiParaCadastro, vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFee
 import { useRequestData } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
 import { render } from "@testing-library/react";
+import { useProtectedPage } from "../Hooks/UseProtectPage";
+
 
 
 const Feed = () => {
+  useProtectedPage()
   const navigate = useNavigate();
   const [data, loading, erro] = useRequestData(`${BASE_URL}/restaurants`)
   const [categoriaExibida, setCategoriaExibida] = useState();
