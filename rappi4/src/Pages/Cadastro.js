@@ -1,9 +1,12 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import  useForm  from "../Hooks/UseForm"
+import useForm from "../Hooks/UseForm"
 import { BASE_URL } from "../Constants/urls"
 import { vaiParaLogin } from "../Router/RouteFunctions";
+import { CadastroContainer } from "../Styles/CadastroStyled";
+import { HeaderLogin } from "../Constants/Headers/HeaderLogin";
+import { Button, TextField } from "@mui/material";
 
 
 const Cadastro = () => {
@@ -12,7 +15,7 @@ const Cadastro = () => {
     name: '',
     email: '',
     cpf: '',
-    password:''
+    password: ''
   })
 
   const onSubmitForm = (event) => {
@@ -23,66 +26,116 @@ const Cadastro = () => {
 
   const onSubmitCadastro = () => {
     axios
-    .post(`${BASE_URL}/signup`, form)
-    .then((res) => {
-      console.log(res.data.token);
-      localStorage.setItem("token", res.data.token);
-      navigate("/endereco");
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-    });
+      .post(`${BASE_URL}/signup`, form)
+      .then((res) => {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        navigate("/endereco");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   return (
-    <div>
-      <h1>Cadastrar</h1>
-      <button onClick={() => vaiParaLogin(navigate)}>Voltar</button>
-      <form onSubmit={onSubmitForm}>
-        <input
+    <CadastroContainer>
+      <HeaderLogin />
+      {/* <h1>Cadastrar</h1>
+      <button onClick={() => vaiParaLogin(navigate)}>Voltar</button> */}
+
+      <form className="Conteudo" onSubmit={onSubmitForm}>
+
+        <img onClick={() => vaiParaLogin(navigate)} src='https://raw.githubusercontent.com/future4code/julian-rappi4B/master/src/assets/logo-future-eats-invert%403x.png' alt="logo" />
+        <p className="cadastro_title">Cadastrar</p>
+
+        <TextField
+          sx={{ borderColor: 'black' }}
+          className="input_text"
+          id="outlined-basic"
+          placeholder="Nome e Sobrenome"
+          label="Nome"
+          variant="outlined"
+          type={'text'}
           value={form.name}
           name={'name'}
           onChange={onChange}
-          placeholder="Nome"
           required
-          />
-          <input
+        />
+
+
+        <TextField
+          className="input_text"
+          id="outlined-basic"
+          placeholder="email@email.com"
+          label="Email"
+          variant="outlined"
+
+
           value={form.email}
           name={'email'}
           onChange={onChange}
-          placeholder="E-mail"
+          type={'email'}
           required
-          type={"email"}
-          />
-          <input
+        />
+
+        <TextField
+          className="input_text"
+          id="outlined-basic"
+          label="CPF"
+          variant="outlined"
+
+
           value={form.cpf}
           name={'cpf'}
           onChange={onChange}
-          placeholder="CPF"
+          placeholder="000.000.000-00"
           required
           pattern={"\d{3}\.\d{3}\.\d{3}-\d{2}"}
-			    title={"Digite um CPF no formato: xxx.xxx.xxx-xx"}
-          type={"cpf"}
-          />
-          <input
+          title={"Digite um CPF no formato: xxx.xxx.xxx-xx"}
+        />
+
+        <TextField
+          className="input_text"
+          id="outlined-basic"
+          variant="outlined"
+
+
           value={form.password}
           name={'password'}
+          label={'Senha'}
           onChange={onChange}
-          placeholder="Senha"
+          placeholder="Mínimo 6 caracteres"
           required
-          type={"password"}
-          />
-        
-        <button 
-          onClick={onSubmitCadastro}
-          type={"submit"}>
-            
-            Criar
-          
-        </button>
-    </form>
-    </div>
-    
+          type={'password'}
+
+        />
+
+        <TextField
+
+          className="input_text"
+          id="outlined-required"
+          label="Confirmar Senha"
+          variant="outlined"
+          // value={form.password}
+          // name={'password'}
+          // onChange={onChange}
+          placeholder="Confirmar Senha"
+          required
+          type={'password'}
+
+
+        />
+
+
+        <Button className="input_btn" type={'submit'} onClick={onSubmitCadastro} disableElevation variant="contained">Criar</Button>
+
+
+      </form>
+
+
+
+    </CadastroContainer>
+
   );
 };
 

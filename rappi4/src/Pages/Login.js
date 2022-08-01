@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants/urls";
 import { vaiParaCadastro } from "../Router/RouteFunctions";
+import { LoginContainer } from "../Styles/LoginStyled";
+import { Button, TextField } from "@mui/material";
 
 
 const Home = () => {
@@ -40,25 +42,32 @@ const Home = () => {
   };
 
   return (
-    <div>
-        <h1>Entrar</h1>
-        
-        <input placeholder="email" 
-        type="email" 
-        value={email} 
-        onChange={onChangeEmail}
-      />
 
-      <input placeholder="senha" 
-        type="password"
-        value={password}
-        onChange={onChangePassword}
-      />
-      <button onClick={onSubmitLogin}>Entrar</button>
-      <button onClick={() => vaiParaCadastro(navigate)}>Não possui cadastro? Clique aqui.</button>
+    <LoginContainer>
 
-    </div>
+
+      <div className="Conteudo">
+
+        <img src='https://raw.githubusercontent.com/future4code/julian-rappi4B/master/src/assets/logo-future-eats-invert%403x.png' alt="logo" />
+
+        <p>Entrar</p>
+
+        <TextField className="input_text" id="outlined-basic" placeholder="email@email.com" label="Email" variant="outlined" type={'email'} value={email} onChange={onChangeEmail} required />
+
+        <TextField className="input_text" id="outlined-basic" placeholder="Mínimo 6 caracteres" label="Senha" variant="outlined" type={'password'} value={password} onChange={onChangePassword} required />
+
+        <Button className="input_btn" onClick={onSubmitLogin} disableElevation variant="contained">Entrar</Button>
+
+        {/* <button >Entrar</button> */}
+        <p onClick={() => vaiParaCadastro(navigate)}>Não possui cadastro? Clique aqui.</p>
+
+      </div>
+
+    </LoginContainer>
+
+
   );
+
 };
 
 export default Home;

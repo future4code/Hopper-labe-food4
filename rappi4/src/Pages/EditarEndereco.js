@@ -5,6 +5,9 @@ import useForm from "../Hooks/UseForm"
 import axios from 'axios';
 import { BASE_URL } from "../Constants/urls"
 import { useProtectedPage } from "../Hooks/UseProtectPage";
+import { Button, TextField } from "@mui/material";
+import { AlterarEnderecoContainer } from "../Styles/EditarEnderecoStyled";
+import { HeaderEditarEndereco } from "../Constants/Headers/HeaderEditarEndereco";
 
 const CadastrarEndereco = () => {
   const navigate = useNavigate();
@@ -30,7 +33,7 @@ const CadastrarEndereco = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .put(`${BASE_URL}/address`, form, {
+    .put(`${BASE_URL}/address`, form, {
         headers: {
           auth: token,
           'Content-Type': 'application/json'
@@ -42,68 +45,106 @@ const CadastrarEndereco = () => {
         navigate("/perfil");
       })
       .catch((err) => {
+        console.log(err.response.token);
         console.log(err.response.data);
       });
   }
 
   return (
-    <div>
-      <h1>Endereço</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          value={form.street}
-          name={'street'}
-          onChange={onChange}
-          placeholder="Logradouro"
-          required
-        />
-        <input
-          value={form.number}
-          name={'number'}
-          onChange={onChange}
-          placeholder="Número"
-          required
-          type={"number"}
-        />
-        <input
-          value={form.complement}
-          name={'complement'}
-          onChange={onChange}
-          placeholder="Complemento"
-        />
-        <input
-          value={form.neighbourhood}
-          name={'neighbourhood'}
-          onChange={onChange}
-          placeholder="Bairro"
-          required
-        />
-        <input
-          value={form.city}
-          name={'city'}
-          onChange={onChange}
-          placeholder="Cidade"
-          required
-        />
-        <input
-          value={form.state}
-          name={'state'}
-          onChange={onChange}
-          placeholder="Estado"
-          required
-        />
+    
+    <AlterarEnderecoContainer>
 
-        <button
-          onClick={onSubmitEndereço}
-          type={"submit"}>
+      <div className="Conteudo">
+      <HeaderEditarEndereco />
+      
+        <form className="Conteudo" onSubmit={onSubmitForm}>
 
-          Salvar
+          <TextField
 
-        </button>
-        <button onClick={() => vaiParaPerfil(navigate)}>Voltar</button>
-      </form>
-    </div>
-  );
-};
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Rua / Av."
+            label="Logradouro"
+            variant="outlined"
+            type={"text"}
+            value={form.street}
+            name={"street"}
+            onChange={onChange}
+            required
+          />
 
-export default CadastrarEndereco;
+          <TextField
+
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Número"
+            label="Número"
+            variant="outlined"
+            type={"number"}
+            value={form.number}
+            name={"number"}
+            onChange={onChange}
+            required
+          />
+
+          <TextField
+
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Complemento"
+            label="Complemento"
+            variant="outlined"
+            value={form.complement}
+            name={"complement"}
+            onChange={onChange}
+            required
+          />
+
+          <TextField
+
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Bairro"
+            label="Bairro"
+            variant="outlined"
+            value={form.neighbourhood}
+            name={"neighbourhood"}
+            onChange={onChange}
+            required
+
+          />
+          <TextField
+
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Cidade"
+            label="Cidade"
+            variant="outlined"
+            value={form.city}
+            name={"city"}
+            onChange={onChange}
+            required
+
+          />
+          <TextField
+
+            className="input_text"
+            id="outlined-basic"
+            placeholder="Estado"
+            label="Estado"
+            variant="outlined"
+            value={form.state}
+            name={"state"}
+            onChange={onChange}
+            required
+
+          />
+          <Button className="input_btn" type={'submit'} onClick={onSubmitEndereço} disableElevation variant="contained">Salvar</Button>
+        </form>
+      </div>
+    </AlterarEnderecoContainer>
+  )
+
+  }
+
+export default CadastrarEndereco
