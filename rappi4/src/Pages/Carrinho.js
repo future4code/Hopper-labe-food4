@@ -155,21 +155,23 @@ export const Carrinho = () => {
   const [tempoPopUp2, setTempoPopUp2] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
+  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);  //ta dando erro aqui!!
   let rest = restaurante ? restaurante : "carregando";
   const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }));
-  const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((prev, curr) => prev + curr, 0);
+  const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((a, b) => a + b);
   const subTotal = (somaCarrinho + rest.shipping).toFixed(2);
   const [enderecos] = useRequestData(`${BASE_URL}/profile/address`);
   let end = !!enderecos ? enderecos : "carregando";
   let endereco = !!end.address ? end.address : "carregando";
 
-  const setaTempo = () => {
-    setTempoPopUp2(!tempoPopUp2)
-    setTimeout(() => {
-    }, (rest.deliveryTime * 60000))
-    setTempoPopUp2(!tempoPopUp2)
-  }
+  // const setaTempo = () => {
+  //   setTempoPopUp2(!tempoPopUp2)
+  //   setTimeout(() => {
+  //   }, (rest.deliveryTime * 60000))
+  //   setTempoPopUp2(!tempoPopUp2)
+  // }
+
+  console.log(somaCarrinho)
 
   const enviaPedido = () => {
     setLoadingPost(true)
@@ -183,7 +185,7 @@ export const Carrinho = () => {
         contentType: "application/json"
       }
     }).then((response) => {
-      setaTempo();
+      // setaTempo();
       setLoadingPost(false);
     }).catch(error => {
       setLoadingPost(false)
@@ -196,14 +198,9 @@ export const Carrinho = () => {
     return <div className='CarrinhoCheio' key={prato.id}>
 
       <img src={prato.photoUrl} alt={prato.name}></img>
-      
-
-
-      <h4>{prato.name}</h4> 
-       <p>{prato.description}</p>
-
-      {/* <p>quantidade:  {prato.quantity}</p> */}
-
+      <h4>{prato.name}</h4>
+      <p>{prato.description}</p>
+      <p> quantidade: {prato.quantity} </p>
       <h3>{`R$: ${parseFloat(prato.precoTotalItem).toFixed(2)}`}</h3>
 
     </div>
@@ -239,22 +236,22 @@ export const Carrinho = () => {
           <h3> {`Frete R$: ${parseFloat(rest.shipping).toFixed(2)}`} </h3>}
 
           {carrinho.length === 0 ? <div className='subtotal_info'> <h3>SUBTOTAL</h3> <h3>R$ 00,00</h3> </div> : <h3>{`SUBTOTAL R$: ${subTotal}`}</h3>}
-         <div className='formaDePagamento'>
+          <div className='formaDePagamento'>
 
-         <h5>FORMA DE PAGAMENTO</h5>
+            <h5>FORMA DE PAGAMENTO</h5>
 
-         <div className='money_card'>
-            <label>
-            <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("money")} />Dinheiro
-            </label>
-<label>
-<input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcard")} />Cartão de Crédito
-</label>
+            <div className='money_card'>
+              <label>
+                <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("money")} />Dinheiro
+              </label>
+              <label>
+                <input type="radio" name="pagamento" value={pagamento} onChange={() => setPagamento("creditcard")} />Cartão de Crédito
+              </label>
 
-         </div>
-         <Button className="input_btn" onClick={() => enviaPedido()} disableElevation variant="contained">Confirmar</Button>
-         </div>
-         
+            </div>
+            <Button className="input_btn" onClick={() => enviaPedido()} disableElevation variant="contained">Confirmar</Button>
+          </div>
+
         </div>
 
         {loadingPost && loadingPost && <p>Carregando...</p>}
@@ -269,7 +266,7 @@ export const Carrinho = () => {
 
 
           </PopUp2>)}
-          
+
         <footer>
           <PersonPinIcon
             sx={{ fontSize: 35, color: "#b8b8b8" }}
