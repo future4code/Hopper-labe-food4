@@ -1,12 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useRequestData2 } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
-import { vaiParaCarrinho, vaiParaFeed } from "../Router/RouteFunctions";
+import { vaiParaCarrinho, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
 import { useProtectedPage } from "../Hooks/UseProtectPage";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../Global/GlobalContext";
 import { HeaderRestaurant } from "../Constants/Headers/HeaderRestaurant";
 import styled from "styled-components";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import HomeIcon from "@mui/icons-material/Home";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const DetalhesRestauranteContainer = styled.div`
   width: 100vw;
@@ -14,6 +17,25 @@ const DetalhesRestauranteContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
+  
+  footer {
+  background-color: #fff;
+  border-top: 1px solid #b8b8b8;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  height: 49px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  #profile {
+    svg {
+      width: 80px;
+    }
+  }
+}
 
   img {
     border-top-left-radius: 5px;
@@ -41,7 +63,6 @@ const DetalhesRestauranteContainer = styled.div`
     }
 
     margin-top: 9px;
-
     display: flex;
     flex-direction: column;
     width: 90vw;
@@ -217,6 +238,25 @@ const DetalhesRestaurante = () => {
         {!loading && erro && <p>Deu ruim!</p>}
         {!loading && rest.products && rest.products.length > 0 && categorias}
       </div>
+
+      <footer>
+        <PersonPinIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="profile"
+          onClick={() => vaiParaPerfil(navigate)}
+        />
+        <HomeIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="home"
+          onClick={() => vaiParaFeed(navigate)}
+        />
+        <ShoppingCartIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="cart"
+          onClick={() => vaiParaCarrinho(navigate)}
+        />
+      </footer>
+
     </DetalhesRestauranteContainer>
   );
 };

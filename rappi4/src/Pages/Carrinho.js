@@ -213,7 +213,7 @@ export const Carrinho = () => {
     <CarrinhoContainer>
       <div className='Conteudo'>
         <HeaderCarrinho />
-        {/* <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button> */}
+        <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
 
         <div className='end_entrega'>
 

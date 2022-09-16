@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { useNavigate } from "react-router-dom";
-import {
-  
-  vaiParaCarrinho,
-  vaiParaDetalhesRestaurante,
-  vaiParaFeed,
-
-  vaiParaPerfil,
-} from "../Router/RouteFunctions";
+import { vaiParaCarrinho, vaiParaDetalhesRestaurante, vaiParaFeed, vaiParaPerfil, } from "../Router/RouteFunctions";
 import { useRequestData } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
-import { render } from "@testing-library/react";
-
 import { HeaderFeed } from "../Constants/Headers/HeaderFeed";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { FeedContainer } from "../Styles/FeedStyled";
-
 
 
 const Feed = () => {
@@ -72,9 +62,8 @@ const Feed = () => {
                 </div>
 
                 <div className="rest_infos">
-                  <p>{`${rest.deliveryTime} - ${
-                    rest.deliveryTime + 10
-                  } min`}</p>
+                  <p>{`${rest.deliveryTime} - ${rest.deliveryTime + 10
+                    } min`}</p>
                   <p>{`Frete R$${rest.shipping},00`}</p>
                 </div>
               </div>
@@ -92,7 +81,7 @@ const Feed = () => {
   const categoriaDeRestaurantes = [
     ...new Map(
       restaurantes.restaurants &&
-        restaurantes.restaurants.map((item) => [item["category"], item])
+      restaurantes.restaurants.map((item) => [item["category"], item])
     ).values(),
   ].map((rest) => {
     return (
