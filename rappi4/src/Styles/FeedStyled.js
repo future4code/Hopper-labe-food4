@@ -84,8 +84,8 @@ export const FeedContainer = styled.div`
         padding: 3.5vw;
         max-width: 100%;
         max-height: 100%;
-        width: 340px;
-        height: 240px;
+        width: 84vw;
+        height: 45vw;
       }
 
       .infos_container {

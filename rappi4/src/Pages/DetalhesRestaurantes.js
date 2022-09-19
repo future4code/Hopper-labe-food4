@@ -20,6 +20,7 @@ const DetalhesRestauranteContainer = styled.div`
   
   h2{
     font-size: 1.1rem;
+    padding: 2vw;
   }
 
   footer {
@@ -45,8 +46,8 @@ const DetalhesRestauranteContainer = styled.div`
     margin: 3vw;
     max-width: 100%;
     max-height: 100%;
-    width: 340px;
-    height: 250px;
+    width: 80vw;
+    height: 50vw;
   }
 
   .Conteudo {
@@ -60,9 +61,10 @@ const DetalhesRestauranteContainer = styled.div`
   .RestaurantInfos {
     .timeAndFrete {
       display: flex;
-
+      
       .time__ {
         margin-right: 30px;
+        
       }
     }
 
@@ -89,8 +91,10 @@ const DetalhesRestauranteContainer = styled.div`
     height: 13vh;
 
     img{
-      margin-top: 4vw;
+      margin-top: 2vh;
       margin-left: 0px;
+      weight: 4vw;
+      height: 2vw;
     }
 
     .btn__add_remove{

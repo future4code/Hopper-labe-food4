@@ -6,7 +6,6 @@ import { useProtectedPage } from "../Hooks/UseProtectPage";
 import { GlobalContext } from "../Global/GlobalContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { useRequestData2, useRequestData } from "../Hooks/useRequestData";
-import PopUp2 from "../Components/PopUpCarrinho/PopUpCarrinho"
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -28,16 +27,21 @@ const CarrinhoContainer = styled.div`
     height: 100vh;
     width: 100vw;
 
+    button{
+      margin: 2vh;
+    }
+
 .CarrinhoCheio{
   border: 1px solid grey;
   border-radius: 5px;
   width: 90vw;
 
   img{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    width: 100%;
-    height: 120px;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 3.5vh;
+    weight: 90vw;
+    height: 40vw;
   }
 p{
   padding-left: 10px;
@@ -124,8 +128,6 @@ margin-top: 20px;
   height: 42px;
   background-color: #e86e5a;
   color: black;
-
- 
 }
   
   footer {
@@ -145,19 +147,18 @@ margin-top: 20px;
         width: 80px;
       }
     }
-
   }
 `;
 export const Carrinho = () => {
 
   useProtectedPage();
   const { id } = useParams();
-  const { states } = useContext(GlobalContext);
+  const { states, dados } = useContext(GlobalContext);
   const { carrinho } = states;
+  const { removeCarrinho } = dados;
   const [loadingPost, setLoadingPost] = useState(false);
   const [erroPost, setErroPost] = useState('');
   const [pagamento, setPagamento] = useState([]);
-  const [tempoPopUp2, setTempoPopUp2] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
@@ -168,15 +169,6 @@ export const Carrinho = () => {
   const [enderecos] = useRequestData(`${BASE_URL}/profile/address`);
   let end = !!enderecos ? enderecos : "carregando";
   let endereco = !!end.address ? end.address : "carregando";
-
-  // const setaTempo = () => {
-  //   setTempoPopUp2(!tempoPopUp2)
-  //   setTimeout(() => {
-  //   }, (rest.deliveryTime * 60000))
-  //   setTempoPopUp2(!tempoPopUp2)
-  // }
-
-  console.log(rest)
 
   const enviaPedido = () => {
     setLoadingPost(true)
@@ -190,7 +182,6 @@ export const Carrinho = () => {
         contentType: "application/json"
       }
     }).then((response) => {
-      // setaTempo();
       setLoadingPost(false);
     }).catch(error => {
       setLoadingPost(false)
@@ -199,16 +190,13 @@ export const Carrinho = () => {
   }
 
   const listaCarrinho = carrinho && carrinho.map((prato) => {
-
     return <div className='CarrinhoCheio' key={prato.id}>
-
       <img src={prato.photoUrl} alt={prato.name}></img>
       <h4>{prato.name}</h4>
       <p>{prato.description}</p>
       <p> quantidade: {prato.quantity} </p>
       <h3>{`R$: ${parseFloat(prato.precoTotalItem).toFixed(2)}`}</h3>
-
-    </div>
+      </div>
   });
 
   return (
@@ -224,7 +212,7 @@ export const Carrinho = () => {
 
         {carrinho.length === 0 && <h3 className='title_carrinho'>Carrinho vazio</h3>}
         {carrinho.length > 0 &&
-          <div className = 'info_restaurante'>
+          <div className='info_restaurante'>
             <h4>{rest.name}</h4>
             <p>{rest.address}</p>
             <p>{`${rest.deliveryTime} min`}</p>
@@ -259,17 +247,7 @@ export const Carrinho = () => {
 
         {loadingPost && loadingPost && <p>Carregando...</p>}
         {!loadingPost && erroPost && <p>Ja existe um pedido em andamento!</p>}
-        {tempoPopUp2 &&
-          (<PopUp2 trigger={tempoPopUp2} setTrigger={setTempoPopUp2}>
-            <div>
-              <p>Pedido em Andamento</p>
-              <p>{rest.name}</p>
-              <p>{`Subtotal R$ ${subTotal}`}</p>
-            </div>
-
-
-          </PopUp2>)}
-
+        
         <footer>
           <PersonPinIcon
             sx={{ fontSize: 35, color: "#b8b8b8" }}
