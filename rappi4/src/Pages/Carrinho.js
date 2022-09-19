@@ -55,7 +55,6 @@ h3{
 }
 }
     .title_carrinho{
-
 margin-bottom: 33px;
 margin-top: 20px;
 
@@ -87,6 +86,12 @@ margin-top: 20px;
     .subtotal_info{
       display: flex;
       justify-content: space-between;
+    }
+
+    .info_restaurante{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .formaDePagamento{
@@ -155,7 +160,7 @@ export const Carrinho = () => {
   const [tempoPopUp2, setTempoPopUp2] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);  //ta dando erro aqui!!
+  const [restaurante] = useRequestData2(`${BASE_URL}/restaurants/${id}`);
   let rest = restaurante ? restaurante : "carregando";
   const carrinhoPost = carrinho && carrinho.map(({ id, quantity }) => ({ id, quantity }));
   const somaCarrinho = carrinho.map(item => item.precoTotalItem).reduce((a, b) => a + b);
@@ -171,7 +176,7 @@ export const Carrinho = () => {
   //   setTempoPopUp2(!tempoPopUp2)
   // }
 
-  console.log(somaCarrinho)
+  console.log(rest)
 
   const enviaPedido = () => {
     setLoadingPost(true)
@@ -213,15 +218,13 @@ export const Carrinho = () => {
         <button onClick={() => vaiParaDetalhesRestaurante(navigate, id)}>Continuar Comprando</button>
 
         <div className='end_entrega'>
-
           <p> Endereço de entrega</p>
           <h4>{`${endereco.street}, ${endereco.number}`}</h4>
-
         </div>
 
         {carrinho.length === 0 && <h3 className='title_carrinho'>Carrinho vazio</h3>}
         {carrinho.length > 0 &&
-          <div>
+          <div className = 'info_restaurante'>
             <h4>{rest.name}</h4>
             <p>{rest.address}</p>
             <p>{`${rest.deliveryTime} min`}</p>

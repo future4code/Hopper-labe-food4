@@ -81,10 +81,11 @@ export const FeedContainer = styled.div`
       width: 90vw;
       margin-bottom: 8px;
       img {
-        width: 100%;
-        height: 120px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        padding: 3.5vw;
+        max-width: 100%;
+        max-height: 100%;
+        width: 340px;
+        height: 240px;
       }
 
       .infos_container {

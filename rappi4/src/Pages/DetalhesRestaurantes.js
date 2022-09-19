@@ -18,6 +18,10 @@ const DetalhesRestauranteContainer = styled.div`
   flex-direction: column;
   font-family: "Roboto", sans-serif;
   
+  h2{
+    font-size: 1.1rem;
+  }
+
   footer {
   background-color: #fff;
   border-top: 1px solid #b8b8b8;
@@ -38,11 +42,11 @@ const DetalhesRestauranteContainer = styled.div`
 }
 
   img {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-top: 17px;
-    width: 90vw;
-    height: 120px;
+    margin: 3vw;
+    max-width: 100%;
+    max-height: 100%;
+    width: 340px;
+    height: 250px;
   }
 
   .Conteudo {
@@ -82,12 +86,19 @@ const DetalhesRestauranteContainer = styled.div`
     border: 1px solid #b8b8b8;
     border-radius: 5px;
     width: 90vw;
-    height: 112px;
+    height: 13vh;
+
+    img{
+      margin-top: 4vw;
+      margin-left: 0px;
+    }
 
     .btn__add_remove{
  display: flex;
  flex-direction: column;
+ margin-right: 2vw;
 
+ 
     }
     #quantidade_count{
       input{
@@ -134,6 +145,7 @@ p{
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: 5px;
 
     .img_prato {
@@ -156,13 +168,14 @@ const DetalhesRestaurante = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { states, dados } = useContext(GlobalContext);
-  const { carrinho } = states;
   const { addCarrinho, removeCarrinho, selecionaQuantidade } = dados;
   const [restaurante, loading, erro] = useRequestData2(
     `${BASE_URL}/restaurants/${id}`
   );
   let rest = restaurante ? restaurante : "carregando";
   const produtos = rest.products;
+
+  console.log(id)
 
   const categorias = [
     ...new Map(
@@ -197,12 +210,12 @@ const DetalhesRestaurante = () => {
                     {selecionaQuantidade()}
                   </div>
 
-                <div className='btn__add_remove'>
+                  <div className='btn__add_remove'>
 
-                <button className='remove_btn' onClick={() => removeCarrinho(prato)}>remover</button>
-                  <button className='add_btn' onClick={() => addCarrinho(prato)}>adicionar</button>
+                    <button className='remove_btn' onClick={() => removeCarrinho(prato)}>remover</button>
+                    <button className='add_btn' onClick={() => addCarrinho(prato)}>adicionar</button>
 
-                </div>
+                  </div>
 
                 </div>
               </div>
@@ -217,14 +230,8 @@ const DetalhesRestaurante = () => {
       <HeaderRestaurant />
 
       <div className="Conteudo">
-        {/* 
-        <button onClick={() => vaiParaFeed(navigate)}>Voltar</button>
-        <button onClick={() => vaiParaCarrinho(navigate, rest.id)}>
-          Carrinho
-        </button> */}
         <div>
           <img src={rest.logoUrl} alt={rest.name} width="20%" />
-
           <div className="RestaurantInfos">
             <h4>{rest.name}</h4>
             <p>{rest.category}</p>
@@ -253,7 +260,7 @@ const DetalhesRestaurante = () => {
         <ShoppingCartIcon
           sx={{ fontSize: 35, color: "#b8b8b8" }}
           id="cart"
-          onClick={() => vaiParaCarrinho(navigate)}
+          onClick={() => vaiParaCarrinho(navigate, id)}
         />
       </footer>
 
