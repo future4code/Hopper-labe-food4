@@ -1,12 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useRequestData2 } from "../Hooks/useRequestData";
 import { BASE_URL } from "../Constants/urls";
-import { vaiParaCarrinho, vaiParaFeed } from "../Router/RouteFunctions";
+import { vaiParaCarrinho, vaiParaFeed, vaiParaPerfil } from "../Router/RouteFunctions";
 import { useProtectedPage } from "../Hooks/UseProtectPage";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../Global/GlobalContext";
 import { HeaderRestaurant } from "../Constants/Headers/HeaderRestaurant";
 import styled from "styled-components";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import HomeIcon from "@mui/icons-material/Home";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const DetalhesRestauranteContainer = styled.div`
   width: 100vw;
@@ -14,13 +17,37 @@ const DetalhesRestauranteContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
+  
+  h2{
+    font-size: 1.1rem;
+    padding: 2vw;
+  }
+
+  footer {
+  background-color: #fff;
+  border-top: 1px solid #b8b8b8;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  height: 49px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  #profile {
+    svg {
+      width: 80px;
+    }
+  }
+}
 
   img {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-top: 17px;
-    width: 90vw;
-    height: 120px;
+    margin: 3vw;
+    max-width: 100%;
+    max-height: 100%;
+    width: 80vw;
+    height: 50vw;
   }
 
   .Conteudo {
@@ -34,14 +61,14 @@ const DetalhesRestauranteContainer = styled.div`
   .RestaurantInfos {
     .timeAndFrete {
       display: flex;
-
+      
       .time__ {
         margin-right: 30px;
+        
       }
     }
 
     margin-top: 9px;
-
     display: flex;
     flex-direction: column;
     width: 90vw;
@@ -61,12 +88,21 @@ const DetalhesRestauranteContainer = styled.div`
     border: 1px solid #b8b8b8;
     border-radius: 5px;
     width: 90vw;
-    height: 112px;
+    height: 13vh;
+
+    img{
+      margin-top: 2vh;
+      margin-left: 0px;
+      weight: 4vw;
+      height: 2vw;
+    }
 
     .btn__add_remove{
  display: flex;
  flex-direction: column;
+ margin-right: 2vw;
 
+ 
     }
     #quantidade_count{
       input{
@@ -113,6 +149,7 @@ p{
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: 5px;
 
     .img_prato {
@@ -135,13 +172,14 @@ const DetalhesRestaurante = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { states, dados } = useContext(GlobalContext);
-  const { carrinho } = states;
   const { addCarrinho, removeCarrinho, selecionaQuantidade } = dados;
   const [restaurante, loading, erro] = useRequestData2(
     `${BASE_URL}/restaurants/${id}`
   );
   let rest = restaurante ? restaurante : "carregando";
   const produtos = rest.products;
+
+  console.log(id)
 
   const categorias = [
     ...new Map(
@@ -176,12 +214,12 @@ const DetalhesRestaurante = () => {
                     {selecionaQuantidade()}
                   </div>
 
-                <div className='btn__add_remove'>
+                  <div className='btn__add_remove'>
 
-                <button className='remove_btn' onClick={() => removeCarrinho(prato)}>remover</button>
-                  <button className='add_btn' onClick={() => addCarrinho(prato)}>adicionar</button>
+                    <button className='remove_btn' onClick={() => removeCarrinho(prato)}>remover</button>
+                    <button className='add_btn' onClick={() => addCarrinho(prato)}>adicionar</button>
 
-                </div>
+                  </div>
 
                 </div>
               </div>
@@ -196,14 +234,8 @@ const DetalhesRestaurante = () => {
       <HeaderRestaurant />
 
       <div className="Conteudo">
-        {/* 
-        <button onClick={() => vaiParaFeed(navigate)}>Voltar</button>
-        <button onClick={() => vaiParaCarrinho(navigate, rest.id)}>
-          Carrinho
-        </button> */}
         <div>
           <img src={rest.logoUrl} alt={rest.name} width="20%" />
-
           <div className="RestaurantInfos">
             <h4>{rest.name}</h4>
             <p>{rest.category}</p>
@@ -217,6 +249,25 @@ const DetalhesRestaurante = () => {
         {!loading && erro && <p>Deu ruim!</p>}
         {!loading && rest.products && rest.products.length > 0 && categorias}
       </div>
+
+      <footer>
+        <PersonPinIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="profile"
+          onClick={() => vaiParaPerfil(navigate)}
+        />
+        <HomeIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="home"
+          onClick={() => vaiParaFeed(navigate)}
+        />
+        <ShoppingCartIcon
+          sx={{ fontSize: 35, color: "#b8b8b8" }}
+          id="cart"
+          onClick={() => vaiParaCarrinho(navigate, id)}
+        />
+      </footer>
+
     </DetalhesRestauranteContainer>
   );
 };

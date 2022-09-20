@@ -6,7 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from "../Constants/urls"
 import styled from "styled-components";
 import { Button, TextField } from "@mui/material";
-import { HeaderCadastrarEndereco } from "../Constants/Headers/HeaderCadastrarEndereco";
+import { HeaderEditarEndereco } from "../Constants/Headers/HeaderEditarEndereco";
 
 
 const CadastrarEnderecoContainer = styled.div`
@@ -94,7 +94,7 @@ const CadastrarEndereco = () => {
 
   return (
     <CadastrarEnderecoContainer>
-<HeaderCadastrarEndereco />
+<HeaderEditarEndereco />
 
       {/* <button onClick={() => vaiParaEditarCadastro(navigate)}>Voltar</button> */}
       <form className="Conteudo" onSubmit={onSubmitForm}>
