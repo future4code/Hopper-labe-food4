@@ -15,13 +15,19 @@ const Cadastro = () => {
     name: '',
     email: '',
     cpf: '',
-    password: ''
+    password: '',
+    confirmPassword: '',
   })
 
   const onSubmitForm = (event) => {
     event.preventDefault()
+    if (form.password !== form.confirmPassword) {
+      alert('As senhas não são iguais')
+    } else {
+      navigate("/endereco")
+    }
     console.log(form)
-    clear()
+    //clear()
   }
 
   const onSubmitCadastro = () => {
@@ -116,9 +122,9 @@ const Cadastro = () => {
           id="outlined-required"
           label="Confirmar Senha"
           variant="outlined"
-          // value={form.password}
-          // name={'password'}
-          // onChange={onChange}
+          value={form.confirmPassword}
+          name={'confirmPassword'}
+          onChange={onChange}
           placeholder="Confirmar Senha"
           required
           type={'password'}
