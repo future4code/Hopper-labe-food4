@@ -88,7 +88,7 @@ const CadastrarEndereco = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        alert("Endereço já cadastrado para esse usuário")
+        alert("Endereço já cadastrado ou dados incompletos")
       });
   }
 
